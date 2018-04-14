@@ -23,7 +23,6 @@ setup(
         'python-dateutil >=2.2, <3',
     ],
     setup_requires=[
-        'nose >=1.3, <2',
         'Sphinx >=1.3, <2',
     ],
     entry_points={
@@ -32,6 +31,7 @@ setup(
         ]
     },
     tests_require=[
+        'nose >=1.3, <2',
         'freezegun >=0.2.8, <0.4',
     ],
     test_suite='nose.collector'
