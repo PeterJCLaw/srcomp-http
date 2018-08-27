@@ -18,7 +18,7 @@ setup(
         'sr.comp >=1.1, <2',
         'mock >=1.0.1, <2',
         'six >=1.8, <2',
-        'Flask >=0.10, <0.11',
+        'Flask >=1.0, <2',
         'simplejson >=3.6, <4',
         'python-dateutil >=2.2, <3',
     ],
