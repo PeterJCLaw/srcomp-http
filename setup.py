@@ -16,7 +16,6 @@ setup(
     install_requires=[
         'PyYAML >=3.11, <4',
         'sr.comp >=1.1, <2',
-        'mock >=1.0.1, <2',
         'six >=1.8, <2',
         'Flask >=1.0, <2',
         'simplejson >=3.6, <4',
@@ -33,6 +32,7 @@ setup(
     tests_require=[
         'nose >=1.3, <2',
         'freezegun >=0.2.8, <0.4',
+        'mock >=1.0.1, <2',
     ],
     test_suite='nose.collector'
 )
