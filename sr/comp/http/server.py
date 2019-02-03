@@ -364,4 +364,7 @@ def error_handler(e):
 
 
 for code in range(400, 499):
-    app.errorhandler(code)(error_handler)
+    try:
+        app.errorhandler(code)(error_handler)
+    except KeyError:
+        pass
