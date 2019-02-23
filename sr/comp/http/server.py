@@ -10,7 +10,7 @@ from flask import g, Flask, jsonify, request, url_for, abort, send_file
 from sr.comp.match_period import MatchType
 from sr.comp.http import errors
 from sr.comp.http.manager import SRCompManager
-from sr.comp.http.json import JsonEncoder
+from sr.comp.http.json_encoder import JsonEncoder
 from sr.comp.http.query_utils import match_json_info, parse_difference_string
 
 

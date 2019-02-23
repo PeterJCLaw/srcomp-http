@@ -30,10 +30,10 @@ Escaping Formatter
     :undoc-members:
     :show-inheritance:
 
-JSON
+JSON Encoder
 ----
 
-.. automodule:: sr.comp.http.json
+.. automodule:: sr.comp.http.json_encoder
     :members:
     :undoc-members:
     :show-inheritance:
