@@ -34,5 +34,6 @@ setup(
         'freezegun >=0.2.8, <0.4',
         'mock >=1.0.1, <2',
     ],
-    test_suite='nose.collector'
+    test_suite='nose.collector',
+    zip_safe=True,
 )
