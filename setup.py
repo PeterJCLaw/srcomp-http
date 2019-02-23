@@ -7,7 +7,7 @@ with open('README.rst') as f:
 setup(
     name='sr.comp.http',
     version='1.1.1',
-    packages=find_packages(),
+    packages=find_packages(exclude=('tests',)),
     namespace_packages=['sr', 'sr.comp'],
     package_data={'sr.comp.http': ['logging-*.ini']},
     long_description=long_description,
