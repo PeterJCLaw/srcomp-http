@@ -5,6 +5,7 @@ from functools import partial
 import os.path
 from pkg_resources import working_set
 
+import werkzeug.exceptions
 from flask import g, Flask, jsonify, request, url_for, abort, send_file
 
 from sr.comp.match_period import MatchType
@@ -346,6 +347,7 @@ def tiebreaker():
         abort(404)
 
 
+@app.errorhandler(werkzeug.exceptions.HTTPException)
 def error_handler(e):
     # fill up the error object with a name, description, code and details
     error = {
@@ -361,7 +363,3 @@ def error_handler(e):
         pass
 
     return jsonify(error=error), e.code
-
-
-for code in range(400, 499):
-    app.errorhandler(code)(error_handler)
