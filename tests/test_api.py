@@ -88,7 +88,7 @@ def test_endpoints():
 
 def test_parent():
     response, code, header = CLIENT.get('')
-    assert code.startswith('301 '), \
+    assert code.startswith('301 ') or code.startswith('308 '), \
         "Should indicate a redirect (actual code: {!r})".format(code)
     assert 'Location' in header, \
         "Should have indicated where to redirect to (headers: {!r})".format(header)
