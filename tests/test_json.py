@@ -5,7 +5,7 @@ import json
 
 from nose.tools import raises
 
-from sr.comp.http.json import JsonEncoder
+from sr.comp.http.json_encoder import JsonEncoder
 
 def get_encoder():
     return JsonEncoder(namedtuple_as_object = True,
