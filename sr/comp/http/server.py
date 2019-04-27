@@ -349,6 +349,9 @@ def tiebreaker():
 
 @app.errorhandler(werkzeug.exceptions.HTTPException)
 def error_handler(e):
+    if e.code < 400:
+        return e
+
     # fill up the error object with a name, description, code and details
     error = {
         'name': type(e).__name__,

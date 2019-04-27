@@ -85,6 +85,16 @@ def test_endpoints():
     for e in endpoints:
         yield server_get, e
 
+
+def test_parent():
+    response, code, header = CLIENT.get('')
+    assert code.startswith('301 '), \
+        "Should indicate a redirect (actual code: {!r})".format(code)
+    assert 'Location' in header, \
+        "Should have indicated where to redirect to (headers: {!r})".format(header)
+    eq_(header['Location'], 'http://localhost/')
+
+
 def test_root():
     eq_(server_get('/'), {'config': '/config',
                           'arenas': '/arenas',
