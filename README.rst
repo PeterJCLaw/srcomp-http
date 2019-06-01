@@ -35,7 +35,7 @@ are not tracked directly, and must be signalled by running the
 Requirements
 ------------
 
--  PyYAML
+-  `SRComp <https://github.com/PeterJCLaw/srcomp>`__
 -  Flask
 -  python-dateutil
 -  simplejson
