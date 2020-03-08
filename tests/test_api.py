@@ -262,11 +262,11 @@ def test_matches():
                 'times': {
                     'slot': {
                         'start': '2014-04-26T13:00:00+01:00',
-                        'end':   '2014-04-26T13:05:00+01:00',
+                        'end': '2014-04-26T13:05:00+01:00',
                     },
                     'game': {
                         'start': '2014-04-26T13:01:30+01:00',
-                        'end':   '2014-04-26T13:04:30+01:00',
+                        'end': '2014-04-26T13:04:30+01:00',
                     },
                     'staging': {
                         'opens': '2014-04-26T12:56:30+01:00',
@@ -279,8 +279,8 @@ def test_matches():
                     },
                 },
             },
-         ],
-         'last_scored': 99,
+        ],
+        'last_scored': 99,
     })
 
 
@@ -297,20 +297,20 @@ def test_match_forwards_limit():
                     'game': {'CLY': 9, 'TTN': 6},
                     'league': {'CLY': 8, 'TTN': 6},
                     'ranking': {'CLY': 1, 'TTN': 2},
-                    },
+                },
                 'times': {
                     'slot': {
                         'start': '2014-04-26T13:00:00+01:00',
-                        'end':   '2014-04-26T13:05:00+01:00',
+                        'end': '2014-04-26T13:05:00+01:00',
                     },
                     'game': {
                         'start': '2014-04-26T13:01:30+01:00',
-                        'end':   '2014-04-26T13:04:30+01:00',
+                        'end': '2014-04-26T13:04:30+01:00',
                     },
                     'staging': {
                         'opens': '2014-04-26T12:56:30+01:00',
-                        'closes':'2014-04-26T12:59:30+01:00',
-                        'signal_teams':       '2014-04-26T12:57:30+01:00',
+                        'closes': '2014-04-26T12:59:30+01:00',
+                        'signal_teams': '2014-04-26T12:57:30+01:00',
                         'signal_shepherds': {
                             'Blue': '2014-04-26T12:57:29+01:00',
                             'Green': '2014-04-26T12:58:29+01:00',
@@ -342,8 +342,8 @@ def test_match_backwards_limit():
                     },
                     'staging': {
                         'opens': '2014-04-27T17:21:30+01:00',
-                        'closes':'2014-04-27T17:24:30+01:00',
-                        'signal_teams':       '2014-04-27T17:22:30+01:00',
+                        'closes': '2014-04-27T17:24:30+01:00',
+                        'signal_teams': '2014-04-27T17:22:30+01:00',
                         'signal_shepherds': {
                             'Blue': '2014-04-27T17:22:29+01:00',
                             'Green': '2014-04-27T17:23:29+01:00',
@@ -430,69 +430,77 @@ def test_current_time():
     eq_(server_get('/current')['time'],
         '2014-04-26T13:01:00+01:00')
 
+
 @freeze_time('2014-04-26 12:30:00')  # UTC
 def test_current_delay():
     eq_(server_get('/current')['delay'], 15)
 
 
-MATCH_0 = [{'num': 0,
-            'display_name': 'Match 0',
-            'arena': 'A',
-            'type': 'league',
-            'teams': [None, 'CLY', 'TTN', None],
-            'scores': {
-               'game': {'CLY': 9, 'TTN': 6},
-               'league': {'CLY': 8, 'TTN': 6},
-               'ranking': {'CLY': 1, 'TTN': 2},
+MATCH_0 = [
+    {
+        'num': 0,
+        'display_name': 'Match 0',
+        'arena': 'A',
+        'type': 'league',
+        'teams': [None, 'CLY', 'TTN', None],
+        'scores': {
+            'game': {'CLY': 9, 'TTN': 6},
+            'league': {'CLY': 8, 'TTN': 6},
+            'ranking': {'CLY': 1, 'TTN': 2},
+        },
+        'times': {
+            'slot': {
+                'start': '2014-04-26T13:00:00+01:00',
+                'end': '2014-04-26T13:05:00+01:00',
             },
-            'times': {
-               'slot': {
-                  'start': '2014-04-26T13:00:00+01:00',
-                  'end':   '2014-04-26T13:05:00+01:00',
-               },
-               'game': {
-                  'start': '2014-04-26T13:01:30+01:00',
-                  'end':   '2014-04-26T13:04:30+01:00',
-               },
-               'staging': {
-                  'opens': '2014-04-26T12:56:30+01:00',
-                  'closes':'2014-04-26T12:59:30+01:00',
-                  'signal_teams':       '2014-04-26T12:57:30+01:00',
-                  'signal_shepherds': {
-                      'Blue': '2014-04-26T12:57:29+01:00',
-                      'Green': '2014-04-26T12:58:29+01:00',
-                  },
-               },
-            }},
-           {'num': 0,
-            'display_name': 'Match 0',
-            'arena': 'B',
-            'type': 'league',
-            'teams': ['GRS', 'QMC', None, None],
-            'scores': {
-               'game': {'QMC': 3, 'GRS': 5},
-               'league': {'QMC': 6, 'GRS': 8},
-               'ranking': {'QMC': 2, 'GRS': 1},
+            'game': {
+                'start': '2014-04-26T13:01:30+01:00',
+                'end': '2014-04-26T13:04:30+01:00',
             },
-            'times': {
-               'slot': {
-                  'start': '2014-04-26T13:00:00+01:00',
-                  'end':   '2014-04-26T13:05:00+01:00',
-               },
-               'game': {
-                  'start': '2014-04-26T13:01:30+01:00',
-                  'end':   '2014-04-26T13:04:30+01:00',
-               },
-               'staging': {
-                  'opens': '2014-04-26T12:56:30+01:00',
-                  'closes':'2014-04-26T12:59:30+01:00',
-                  'signal_teams':       '2014-04-26T12:57:30+01:00',
-                  'signal_shepherds': {
-                      'Blue': '2014-04-26T12:57:29+01:00',
-                      'Green': '2014-04-26T12:58:29+01:00',
-                  },
-               },
-            }}]
+            'staging': {
+                'opens': '2014-04-26T12:56:30+01:00',
+                'closes': '2014-04-26T12:59:30+01:00',
+                'signal_teams': '2014-04-26T12:57:30+01:00',
+                'signal_shepherds': {
+                    'Blue': '2014-04-26T12:57:29+01:00',
+                    'Green': '2014-04-26T12:58:29+01:00',
+                },
+            },
+        },
+    },
+    {
+        'num': 0,
+        'display_name': 'Match 0',
+        'arena': 'B',
+        'type': 'league',
+        'teams': ['GRS', 'QMC', None, None],
+        'scores': {
+            'game': {'QMC': 3, 'GRS': 5},
+            'league': {'QMC': 6, 'GRS': 8},
+            'ranking': {'QMC': 2, 'GRS': 1},
+        },
+        'times': {
+            'slot': {
+                'start': '2014-04-26T13:00:00+01:00',
+                'end': '2014-04-26T13:05:00+01:00',
+            },
+            'game': {
+                'start': '2014-04-26T13:01:30+01:00',
+                'end': '2014-04-26T13:04:30+01:00',
+            },
+            'staging': {
+                'opens': '2014-04-26T12:56:30+01:00',
+                'closes': '2014-04-26T12:59:30+01:00',
+                'signal_teams': '2014-04-26T12:57:30+01:00',
+                'signal_shepherds': {
+                    'Blue': '2014-04-26T12:57:29+01:00',
+                    'Green': '2014-04-26T12:58:29+01:00',
+                },
+            },
+        },
+    },
+]
+
 
 @freeze_time('2014-04-26 11:55:00')  # UTC
 def test_current_shepherding_match_none():
@@ -500,11 +508,13 @@ def test_current_shepherding_match_none():
     match_list.sort(key=lambda match: match['arena'])
     eq_(match_list, [])
 
+
 @freeze_time('2014-04-26 11:58:00')  # UTC
 def test_current_shepherding_match():
     match_list = server_get('/current')['shepherding_matches']
     match_list.sort(key=lambda match: match['arena'])
     eq_(match_list, MATCH_0)
+
 
 @freeze_time('2014-04-26 11:55:00')  # UTC
 def test_current_staging_match_none():
@@ -512,11 +522,13 @@ def test_current_staging_match_none():
     match_list.sort(key=lambda match: match['arena'])
     eq_(match_list, [])
 
+
 @freeze_time('2014-04-26 11:57:00')  # UTC
 def test_current_staging_match():
     match_list = server_get('/current')['staging_matches']
     match_list.sort(key=lambda match: match['arena'])
     eq_(match_list, MATCH_0)
+
 
 @freeze_time('2014-04-26 12:01:00')  # UTC
 def test_current_match():

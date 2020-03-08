@@ -9,6 +9,7 @@ def get_encoder():
         tuple_as_array=True,
     )
 
+
 def test_simple():
     encoder = get_encoder()
 
@@ -19,6 +20,7 @@ def test_simple():
     output = encoder.encode([1, 2, 3])
 
     assert "[1, 2, 3]" == output
+
 
 def test_enum():
     encoder = get_encoder()
