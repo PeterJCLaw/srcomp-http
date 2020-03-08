@@ -63,7 +63,7 @@ def update_lock(compstate_path):
         touch_update_file(compstate_path)
 
 
-class SRCompManager(object):
+class SRCompManager:
     """An ``SRComp`` manager."""
 
     def __init__(self):
