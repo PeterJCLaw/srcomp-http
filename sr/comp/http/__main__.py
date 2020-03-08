@@ -2,8 +2,7 @@
 
 from argparse import ArgumentParser
 
-from sr.comp.http import config, app
-
+from sr.comp.http import app, config
 
 parser = ArgumentParser(description="SR Competition info API HTTP server")
 parser.add_argument("compstate", help="Competition state git repository path")

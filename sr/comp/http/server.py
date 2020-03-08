@@ -1,19 +1,18 @@
 import datetime
+import os.path
+from functools import partial
+
 import dateutil.parser
 import dateutil.tz
-from functools import partial
-import os.path
+import werkzeug.exceptions
+from flask import abort, Flask, g, jsonify, request, send_file, url_for
 from pkg_resources import working_set
 
-import werkzeug.exceptions
-from flask import g, Flask, jsonify, request, url_for, abort, send_file
-
-from sr.comp.match_period import MatchType
 from sr.comp.http import errors
-from sr.comp.http.manager import SRCompManager
 from sr.comp.http.json_encoder import JsonEncoder
+from sr.comp.http.manager import SRCompManager
 from sr.comp.http.query_utils import match_json_info, parse_difference_string
-
+from sr.comp.match_period import MatchType
 
 app = Flask('sr.comp.http')
 app.json_encoder = JsonEncoder

@@ -2,11 +2,11 @@
 
 from enum import Enum
 
-from flask import g
 import flask.json
+from flask import g
 
-from sr.comp.match_period import Match
 from sr.comp.http.query_utils import match_json_info
+from sr.comp.match_period import Match
 
 
 class JsonEncoder(flask.json.JSONEncoder):

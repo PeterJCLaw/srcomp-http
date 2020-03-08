@@ -9,7 +9,6 @@ import time
 
 from sr.comp.comp import SRComp
 
-
 LOCK_FILE = ".update-lock"
 UPDATE_FILE = ".update-pls"
 
