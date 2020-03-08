@@ -74,7 +74,7 @@ def test_endpoints():
         '/matches?type=league&limit=10',
         '/matches/last_scored',
         '/periods',
-        '/state'
+        '/state',
     ]
 
     for e in endpoints:
@@ -255,18 +255,18 @@ def test_matches():
                 'type': 'league',
                 'teams': [None, 'CLY', 'TTN', None],
                 'scores': {
-                'game': {'CLY': 9, 'TTN': 6},
-                'league': {'CLY': 8, 'TTN': 6},
-                'ranking': {'CLY': 1, 'TTN': 2},
+                    'game': {'CLY': 9, 'TTN': 6},
+                    'league': {'CLY': 8, 'TTN': 6},
+                    'ranking': {'CLY': 1, 'TTN': 2},
                 },
                 'times': {
                     'slot': {
                         'start': '2014-04-26T13:00:00+01:00',
-                        'end':   '2014-04-26T13:05:00+01:00'
+                        'end':   '2014-04-26T13:05:00+01:00',
                     },
                     'game': {
                         'start': '2014-04-26T13:01:30+01:00',
-                        'end':   '2014-04-26T13:04:30+01:00'
+                        'end':   '2014-04-26T13:04:30+01:00',
                     },
                     'staging': {
                         'opens': '2014-04-26T12:56:30+01:00',
@@ -274,13 +274,13 @@ def test_matches():
                         'signal_teams': '2014-04-26T12:57:30+01:00',
                         'signal_shepherds': {
                             'Blue': '2014-04-26T12:57:29+01:00',
-                            'Green': '2014-04-26T12:58:29+01:00'
-                        }
+                            'Green': '2014-04-26T12:58:29+01:00',
+                        },
                     },
                 },
             },
          ],
-         'last_scored': 99
+         'last_scored': 99,
     })
 
 
@@ -301,11 +301,11 @@ def test_match_forwards_limit():
                 'times': {
                     'slot': {
                         'start': '2014-04-26T13:00:00+01:00',
-                        'end':   '2014-04-26T13:05:00+01:00'
+                        'end':   '2014-04-26T13:05:00+01:00',
                     },
                     'game': {
                         'start': '2014-04-26T13:01:30+01:00',
-                        'end':   '2014-04-26T13:04:30+01:00'
+                        'end':   '2014-04-26T13:04:30+01:00',
                     },
                     'staging': {
                         'opens': '2014-04-26T12:56:30+01:00',
@@ -313,11 +313,11 @@ def test_match_forwards_limit():
                         'signal_teams':       '2014-04-26T12:57:30+01:00',
                         'signal_shepherds': {
                             'Blue': '2014-04-26T12:57:29+01:00',
-                            'Green': '2014-04-26T12:58:29+01:00'
-                        }
+                            'Green': '2014-04-26T12:58:29+01:00',
+                        },
                     },
-                }
-            }
+                },
+            },
         ],
         'last_scored': 99,
     })
@@ -334,11 +334,11 @@ def test_match_backwards_limit():
                 'times': {
                     'game': {
                         'end': '2014-04-27T17:29:30+01:00',
-                        'start': '2014-04-27T17:26:30+01:00'
+                        'start': '2014-04-27T17:26:30+01:00',
                     },
                     'slot': {
                         'end': '2014-04-27T17:30:00+01:00',
-                        'start': '2014-04-27T17:25:00+01:00'
+                        'start': '2014-04-27T17:25:00+01:00',
                     },
                     'staging': {
                         'opens': '2014-04-27T17:21:30+01:00',
@@ -346,12 +346,12 @@ def test_match_backwards_limit():
                         'signal_teams':       '2014-04-27T17:22:30+01:00',
                         'signal_shepherds': {
                             'Blue': '2014-04-27T17:22:29+01:00',
-                            'Green': '2014-04-27T17:23:29+01:00'
-                        }
-                    }
+                            'Green': '2014-04-27T17:23:29+01:00',
+                        },
+                    },
                 },
-                'teams': ['???', '???', '???', '???']
-            }
+                'teams': ['???', '???', '???', '???'],
+            },
         ],
         'last_scored': 99,
     })
@@ -387,7 +387,7 @@ def test_periods():
                 "last_num": 52,
             },
             "max_end_time": "Sat, 26 Apr 2014 16:40:00 GMT",
-            "start_time": "Sat, 26 Apr 2014 12:00:00 GMT"
+            "start_time": "Sat, 26 Apr 2014 12:00:00 GMT",
         },
         {
             "type": "league",
@@ -398,7 +398,7 @@ def test_periods():
                 "last_num": 86,
             },
             "max_end_time": "Sun, 27 Apr 2014 11:20:00 GMT",
-            "start_time": "Sun, 27 Apr 2014 08:30:00 GMT"
+            "start_time": "Sun, 27 Apr 2014 08:30:00 GMT",
         },
         {
             "type": "league",
@@ -409,7 +409,7 @@ def test_periods():
                 "last_num": 110,
             },
             "max_end_time": "Sun, 27 Apr 2014 14:10:00 GMT",
-            "start_time": "Sun, 27 Apr 2014 12:15:00 GMT"
+            "start_time": "Sun, 27 Apr 2014 12:15:00 GMT",
         },
         {
             "type": "knockout",
@@ -417,11 +417,11 @@ def test_periods():
             "end_time": "Sun, 27 Apr 2014 16:30:00 GMT",
             "matches": {
                 "first_num": 111,
-                "last_num": 129
+                "last_num": 129,
             },
             "max_end_time": "Sun, 27 Apr 2014 16:30:00 GMT",
-            "start_time": "Sun, 27 Apr 2014 14:30:00 GMT"
-        }
+            "start_time": "Sun, 27 Apr 2014 14:30:00 GMT",
+        },
     ]})
 
 
@@ -448,11 +448,11 @@ MATCH_0 = [{'num': 0,
             'times': {
                'slot': {
                   'start': '2014-04-26T13:00:00+01:00',
-                  'end':   '2014-04-26T13:05:00+01:00'
+                  'end':   '2014-04-26T13:05:00+01:00',
                },
                'game': {
                   'start': '2014-04-26T13:01:30+01:00',
-                  'end':   '2014-04-26T13:04:30+01:00'
+                  'end':   '2014-04-26T13:04:30+01:00',
                },
                'staging': {
                   'opens': '2014-04-26T12:56:30+01:00',
@@ -460,9 +460,9 @@ MATCH_0 = [{'num': 0,
                   'signal_teams':       '2014-04-26T12:57:30+01:00',
                   'signal_shepherds': {
                       'Blue': '2014-04-26T12:57:29+01:00',
-                      'Green': '2014-04-26T12:58:29+01:00'
-                  }
-               }
+                      'Green': '2014-04-26T12:58:29+01:00',
+                  },
+               },
             }},
            {'num': 0,
             'display_name': 'Match 0',
@@ -477,11 +477,11 @@ MATCH_0 = [{'num': 0,
             'times': {
                'slot': {
                   'start': '2014-04-26T13:00:00+01:00',
-                  'end':   '2014-04-26T13:05:00+01:00'
+                  'end':   '2014-04-26T13:05:00+01:00',
                },
                'game': {
                   'start': '2014-04-26T13:01:30+01:00',
-                  'end':   '2014-04-26T13:04:30+01:00'
+                  'end':   '2014-04-26T13:04:30+01:00',
                },
                'staging': {
                   'opens': '2014-04-26T12:56:30+01:00',
@@ -489,8 +489,8 @@ MATCH_0 = [{'num': 0,
                   'signal_teams':       '2014-04-26T12:57:30+01:00',
                   'signal_shepherds': {
                       'Blue': '2014-04-26T12:57:29+01:00',
-                      'Green': '2014-04-26T12:58:29+01:00'
-                  }
+                      'Green': '2014-04-26T12:58:29+01:00',
+                  },
                },
             }}]
 
