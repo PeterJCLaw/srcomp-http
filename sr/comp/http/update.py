@@ -2,9 +2,8 @@
 
 """Update the given compstate repo in a safe manner."""
 
-from sr.comp.raw_compstate import RawCompstate
-
 from sr.comp.http.manager import update_lock
+from sr.comp.raw_compstate import RawCompstate
 
 DEFAULT_REVISION = 'origin/master'
 BOLD = '\033[1m'
@@ -12,13 +11,13 @@ FAIL = '\033[91m'
 ENDC = '\033[0m'
 
 def add_arguments(parser):
-    parser.add_argument("compstate", help = "Competition state git repository path")
+    parser.add_argument("compstate", help="Competition state git repository path")
     rev_help = "Target revision to update to (default: {})".format(DEFAULT_REVISION)
     parser.add_argument(
         "revision",
-        default = DEFAULT_REVISION,
-        nargs = '?',
-        help = rev_help,
+        default=DEFAULT_REVISION,
+        nargs='?',
+        help=rev_help,
     )
 
 def run_update(args):
