@@ -58,7 +58,7 @@ def test_league_match():
     expected = {
         "game": GAME_POINTS_DUMMY + "('A', 0)",
         "league": RANKED_DUMMY + "('A', 0)",
-        "ranking": { POSITIONS_DUMMY + "'A'": 0 },
+        "ranking": {POSITIONS_DUMMY + "'A'": 0},
     }
     assert expected == info
 
@@ -74,7 +74,7 @@ def test_knockout_match():
     expected = {
         "game": GAME_POINTS_DUMMY + "('A', 1)",
         "normalised": RANKED_DUMMY + "('A', 1)",
-        "ranking": { RESOLVED_DUMMY + "'A'": 1 },
+        "ranking": {RESOLVED_DUMMY + "'A'": 1},
     }
     assert expected == info
 
@@ -90,7 +90,7 @@ def test_finals_match():
     expected = {
         "game": GAME_POINTS_DUMMY + "('A', 1)",
         "normalised": RANKED_DUMMY + "('A', 1)",
-        "ranking": { POSITIONS_DUMMY + "'A'": 1 },
+        "ranking": {POSITIONS_DUMMY + "'A'": 1},
     }
     assert expected == info
 
@@ -105,7 +105,7 @@ def test_tiebreaker_match():
     expected = {
         "game": GAME_POINTS_DUMMY + "('A', 2)",
         "normalised": RANKED_DUMMY + "('A', 2)",
-        "ranking": { POSITIONS_DUMMY + "'A'": 2 },
+        "ranking": {POSITIONS_DUMMY + "'A'": 2},
     }
     assert expected == info
 
