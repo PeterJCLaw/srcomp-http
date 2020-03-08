@@ -218,7 +218,7 @@ def get_config_dict(comp):
         },
         'server': {
             library: working_set.by_key[library].version
-            for library in ('sr.comp', 'sr.comp.http', 'sr.comp.ranker', 'flask')
+            for library in ('sr.comp', 'sr.comp.http', 'sr.comp.ranker', 'league_ranker', 'flask')
             if library in working_set.by_key
         },
         'ping_period': 10
