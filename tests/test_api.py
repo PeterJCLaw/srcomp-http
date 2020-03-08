@@ -29,8 +29,6 @@ def raises_api_error(name, code):
             except ApiError as e:
                 assert e.name == name
                 assert e.code == code
-            except:
-                raise
             else:
                 raise AssertionError('Did not raise API error.')
         return wrapper
