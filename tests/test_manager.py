@@ -6,7 +6,7 @@ from sr.comp.http.manager import LOCK_FILE, update_lock
 
 def test_update_lock():
     mock_excl_fd = mock.MagicMock()
-    mock_excl_lock = mock.Mock(return_value = mock_excl_fd)
+    mock_excl_lock = mock.Mock(return_value=mock_excl_fd)
 
     with mock.patch('sr.comp.http.manager.exclusive_lock', mock_excl_lock), \
          mock.patch('sr.comp.http.manager.touch_update_file') as mock_touch:
@@ -21,7 +21,7 @@ def test_update_lock():
 
 def test_update_lock_when_exception():
     mock_excl_fd = mock.MagicMock()
-    mock_excl_lock = mock.Mock(return_value = mock_excl_fd)
+    mock_excl_lock = mock.Mock(return_value=mock_excl_fd)
 
     class FakeError(Exception):
         pass
