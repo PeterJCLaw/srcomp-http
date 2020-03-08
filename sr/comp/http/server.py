@@ -37,16 +37,18 @@ def after_request(resp):
 
 @app.route('/')
 def root():
-    return jsonify(arenas=url_for('arenas'),
-                   teams=url_for('teams'),
-                   corners=url_for('corners'),
-                   config=url_for('config'),
-                   state=url_for('state'),
-                   locations=url_for('locations'),
-                   matches=url_for('matches'),
-                   periods=url_for('match_periods'),
-                   current=url_for('current_state'),
-                   knockout=url_for('knockout'))
+    return jsonify(
+        arenas=url_for('arenas'),
+        teams=url_for('teams'),
+        corners=url_for('corners'),
+        config=url_for('config'),
+        state=url_for('state'),
+        locations=url_for('locations'),
+        matches=url_for('matches'),
+        periods=url_for('match_periods'),
+        current=url_for('current_state'),
+        knockout=url_for('knockout'),
+    )
 
 
 def format_arena(arena):
@@ -60,8 +62,10 @@ def format_arena(arena):
 @app.route('/arenas')
 def arenas():
     comp = g.comp_man.get_comp()
-    return jsonify(arenas={name: format_arena(arena)
-                           for name, arena in comp.arenas.items()})
+    return jsonify(arenas={
+        name: format_arena(arena)
+        for name, arena in comp.arenas.items()
+    })
 
 
 @app.route('/arenas/<name>')
@@ -85,8 +89,10 @@ def format_location(location):
 def locations():
     comp = g.comp_man.get_comp()
 
-    return jsonify(locations={name: format_location(location)
-                              for name, location in comp.venue.locations.items()})
+    return jsonify(locations={
+        name: format_location(location)
+        for name, location in comp.venue.locations.items()
+    })
 
 @app.route('/locations/<name>')
 def get_location(name):
@@ -104,19 +110,27 @@ def team_info(comp, team):
     scores = comp.scores.league.teams[team.tla]
     league_pos = comp.scores.league.positions[team.tla]
     location = comp.venue.get_team_location(team.tla)
-    info = {'name': team.name,
-            'get': url_for('get_team', tla=team.tla),
-            'tla': team.tla,
-            'league_pos': league_pos,
-            'location': {
-                'name': location,
-                'get': url_for('get_location', name=location),
-            },
-            'scores': {'league': scores.league_points,
-                       'game': scores.game_points}}
+    info = {
+        'name': team.name,
+        'get': url_for('get_team', tla=team.tla),
+        'tla': team.tla,
+        'league_pos': league_pos,
+        'location': {
+            'name': location,
+            'get': url_for('get_location', name=location),
+        },
+        'scores': {
+            'league': scores.league_points,
+            'game': scores.game_points,
+        },
+    }
 
-    if os.path.exists(os.path.join(g.comp_man.root_dir, 'teams', 'images',
-                                   '{}.png'.format(team.tla))):
+    if os.path.exists(os.path.join(
+        g.comp_man.root_dir,
+        'teams',
+        'images',
+        '{}.png'.format(team.tla),
+    )):
         info['image_url'] = url_for('get_team_image', tla=team.tla)
 
     return info
@@ -153,8 +167,12 @@ def get_team_image(tla):
     except KeyError:
         abort(404)
 
-    filename = os.path.join(g.comp_man.root_dir, 'teams', 'images',
-                            '{}.png'.format(team.tla))
+    filename = os.path.join(
+        g.comp_man.root_dir,
+        'teams',
+        'images',
+        '{}.png'.format(team.tla),
+    )
     if os.path.exists(filename):
         return send_file(filename, mimetype='image/png')
     else:
@@ -170,8 +188,10 @@ def format_corner(corner):
 @app.route("/corners")
 def corners():
     comp = g.comp_man.get_comp()
-    return jsonify(corners={number: format_corner(corner)
-                            for number, corner in comp.corners.items()})
+    return jsonify(corners={
+        number: format_corner(corner)
+        for number, corner in comp.corners.items()
+    })
 
 
 @app.route("/corners/<int:number>")
@@ -192,11 +212,14 @@ def state():
 
 def get_config_dict(comp):
     return {
-        'match_slots': {k: int(v.total_seconds())
-                        for k, v in comp.schedule.match_slot_lengths.items()},
-        'server': {library: working_set.by_key[library].version
-                   for library in ('sr.comp', 'sr.comp.http', 'sr.comp.ranker',
-                                   'flask')},
+        'match_slots': {
+            k: int(v.total_seconds())
+            for k, v in comp.schedule.match_slot_lengths.items()
+        },
+        'server': {
+            library: working_set.by_key[library].version
+            for library in ('sr.comp', 'sr.comp.http', 'sr.comp.ranker', 'flask')
+        },
         'ping_period': 10
     }
 
@@ -218,8 +241,10 @@ def matches():
     comp = g.comp_man.get_comp()
     matches = []
     for slots in comp.schedule.matches:
-        matches.extend(match_json_info(comp, match)
-                       for match in slots.values())
+        matches.extend(
+            match_json_info(comp, match)
+            for match in slots.values()
+        )
 
     def parse_date(string):
         if ' ' in string:
@@ -250,8 +275,11 @@ def matches():
             value = request.args[filter_key]
             try:
                 predicate = parse_difference_string(value, filter_type)
-                matches = [match for match in matches
-                           if predicate(filter_type(filter_value(match)))]
+                matches = [
+                    match
+                    for match in matches
+                    if predicate(filter_type(filter_value(match)))
+                ]
             except ValueError:
                 raise errors.BadRequest("Bad value '{0}' for '{1}'.".format(value, filter_key))
 
@@ -307,8 +335,10 @@ def current_state():
     delay = comp.schedule.delay_at(time)
     delay_seconds = int(delay.total_seconds())
 
-    matches = list(map(partial(match_json_info, comp),
-                       comp.schedule.matches_at(time)))
+    matches = list(map(
+        partial(match_json_info, comp),
+        comp.schedule.matches_at(time),
+    ))
 
     staging_matches = []
     shepherding_matches = []
@@ -327,9 +357,13 @@ def current_state():
             if first_signal <= time:
                 shepherding_matches.append(match_json_info(comp, match))
 
-    return jsonify(delay=delay_seconds, time=time.isoformat(),
-                   matches=matches, staging_matches=staging_matches,
-                   shepherding_matches=shepherding_matches)
+    return jsonify(
+        delay=delay_seconds,
+        time=time.isoformat(),
+        matches=matches,
+        staging_matches=staging_matches,
+        shepherding_matches=shepherding_matches,
+    )
 
 
 @app.route('/knockout')

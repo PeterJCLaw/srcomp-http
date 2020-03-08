@@ -28,16 +28,34 @@ def build_scores():
     return scores
 
 
-def build_match(num, arena, teams=None, start_time=None, end_time=None,
-                type_=None, use_resolved_ranking=False):
-    return Match(num, 'Match {n}'.format(n=num), arena, teams, start_time,
-                 end_time, type_, use_resolved_ranking)
+def build_match(
+    num,
+    arena,
+    teams=None,
+    start_time=None,
+    end_time=None,
+    type_=None,
+    use_resolved_ranking=False,
+):
+    return Match(
+        num,
+        'Match {n}'.format(n=num),
+        arena,
+        teams,
+        start_time,
+        end_time,
+        type_,
+        use_resolved_ranking,
+    )
 
 
 def test_league_match():
     scores = build_scores()
-    info = get_scores(scores, build_match(num=0, arena='A',
-                                          type_=MatchType.league))
+    info = get_scores(scores, build_match(
+        num=0,
+        arena='A',
+        type_=MatchType.league,
+    ))
     expected = {
         "game": GAME_POINTS_DUMMY + "('A', 0)",
         "league": RANKED_DUMMY + "('A', 0)",
@@ -48,9 +66,12 @@ def test_league_match():
 
 def test_knockout_match():
     scores = build_scores()
-    info = get_scores(scores, build_match(num=1, arena='A',
-                                          type_=MatchType.knockout,
-                                          use_resolved_ranking=True))
+    info = get_scores(scores, build_match(
+        num=1,
+        arena='A',
+        type_=MatchType.knockout,
+        use_resolved_ranking=True,
+    ))
     expected = {
         "game": GAME_POINTS_DUMMY + "('A', 1)",
         "normalised": RANKED_DUMMY + "('A', 1)",
@@ -61,9 +82,12 @@ def test_knockout_match():
 
 def test_finals_match():
     scores = build_scores()
-    info = get_scores(scores, build_match(num=1, arena='A',
-                                          type_=MatchType.knockout,
-                                          use_resolved_ranking=False))
+    info = get_scores(scores, build_match(
+        num=1,
+        arena='A',
+        type_=MatchType.knockout,
+        use_resolved_ranking=False,
+    ))
     expected = {
         "game": GAME_POINTS_DUMMY + "('A', 1)",
         "normalised": RANKED_DUMMY + "('A', 1)",
@@ -74,8 +98,11 @@ def test_finals_match():
 
 def test_tiebreaker_match():
     scores = build_scores()
-    info = get_scores(scores, build_match(num=2, arena='A',
-                                          type_=MatchType.tiebreaker))
+    info = get_scores(scores, build_match(
+        num=2,
+        arena='A',
+        type_=MatchType.tiebreaker,
+    ))
     expected = {
         "game": GAME_POINTS_DUMMY + "('A', 2)",
         "normalised": RANKED_DUMMY + "('A', 2)",

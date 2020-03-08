@@ -14,10 +14,12 @@ ENDC = '\033[0m'
 def add_arguments(parser):
     parser.add_argument("compstate", help = "Competition state git repository path")
     rev_help = "Target revision to update to (default: {})".format(DEFAULT_REVISION)
-    parser.add_argument("revision",
-                        default = DEFAULT_REVISION,
-                        nargs = '?',
-                        help = rev_help)
+    parser.add_argument(
+        "revision",
+        default = DEFAULT_REVISION,
+        nargs = '?',
+        help = rev_help,
+    )
 
 def run_update(args):
     compstate = RawCompstate(args.compstate, local_only=True)

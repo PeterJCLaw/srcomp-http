@@ -95,19 +95,23 @@ def match_json_info(comp, match):
                 "end": match.end_time.isoformat()
             },
             "game": {
-                "start": (match.start_time +
-                          match_slot_lengths['pre']).isoformat(),
-                "end": (match.start_time +
-                        match_slot_lengths['pre'] +
-                        match_slot_lengths['match']).isoformat()
+                "start": (
+                    match.start_time +
+                    match_slot_lengths['pre']
+                ).isoformat(),
+                "end": (
+                    match.start_time +
+                    match_slot_lengths['pre'] +
+                    match_slot_lengths['match']
+                ).isoformat()
             },
             'staging': {
                 'opens': staging_times['opens'].isoformat(),
                 'closes': staging_times['closes'].isoformat(),
                 'signal_teams': staging_times['signal_teams'].isoformat(),
                 'signal_shepherds': {
-                    area: time.isoformat() \
-                     for area, time in staging_times['signal_shepherds'].items()
+                    area: time.isoformat()
+                    for area, time in staging_times['signal_shepherds'].items()
                 },
             },
         }
