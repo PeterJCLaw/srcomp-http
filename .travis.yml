@@ -11,6 +11,8 @@ matrix:
 before_install:
   - pip install git+https://github.com/PeterJCLaw/ranker.git
   - pip install git+https://github.com/PeterJCLaw/srcomp.git
+  # Force Jinja2 to a version which supports Python 3.5
+  - pip install 'Jinja2<3'
 install: python setup.py install
 script:
   - ./run-tests
