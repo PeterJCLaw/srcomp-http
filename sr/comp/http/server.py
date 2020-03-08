@@ -290,8 +290,7 @@ def matches():
     except KeyError:
         pass
     except ValueError:
-        raise errors.BadRequest(
-            'Limit must be a positive or negative integer.')
+        raise errors.BadRequest('Limit must be a positive or negative integer.')
     else:
         if limit == 0:
             matches = []
