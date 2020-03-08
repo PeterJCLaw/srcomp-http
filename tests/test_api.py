@@ -806,7 +806,8 @@ def test_knockouts():
     # large structure very well (ie, the failure output sucks)
     for r_num, matches in enumerate(ref):
 
-        assert r_num < len(actual_rounds), "Failed to get round '{0}' from server".format(r_num)
+        assert r_num < len(actual_rounds), \
+            "Failed to get round '{0}' from server".format(r_num)
 
         actual_matches = actual_rounds[r_num]
 
