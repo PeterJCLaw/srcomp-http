@@ -1,5 +1,4 @@
-from setuptools import setup, find_packages
-
+from setuptools import find_packages, setup
 
 with open('README.rst') as f:
     long_description = f.read()
@@ -26,8 +25,8 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'srcomp-update = sr.comp.http.update:main'
-        ]
+            'srcomp-update = sr.comp.http.update:main',
+        ],
     },
     tests_require=[
         'nose >=1.3, <2',
