@@ -21,7 +21,7 @@ class JsonEncoder(flask.json.JSONEncoder):
         # approriate '_asdict' methods.
         kwargs.pop('namedtuple_as_object')
         kwargs.pop('tuple_as_array')
-        super(JsonEncoder, self).__init__(
+        super().__init__(
             *args,
             namedtuple_as_object=False,
             tuple_as_array=False,
@@ -35,4 +35,4 @@ class JsonEncoder(flask.json.JSONEncoder):
             comp = g.comp_man.get_comp()
             return match_json_info(comp, obj)
         else:
-            return super(JsonEncoder, self).default(obj)
+            return super().default(obj)
