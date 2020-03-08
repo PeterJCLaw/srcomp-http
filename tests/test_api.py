@@ -526,7 +526,6 @@ def test_current_match():
 
 
 def test_knockouts():
-    import pprint
     ref = [[
         {
             'arena': 'A',
