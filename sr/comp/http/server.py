@@ -222,7 +222,7 @@ def get_config_dict(comp):
             for library in LIBRARIES
             if library in working_set.by_key
         },
-        'ping_period': 10
+        'ping_period': 10,
     }
 
 
@@ -250,8 +250,10 @@ def matches():
 
     def parse_date(string):
         if ' ' in string:
-            raise errors.BadRequest('Date string should not contain spaces. '
-                                    "Did you pass in a '+'?")
+            raise errors.BadRequest(
+                'Date string should not contain spaces. '
+                "Did you pass in a '+'?",
+            )
         else:
             return dateutil.parser.parse(string)
 
@@ -262,7 +264,7 @@ def matches():
         ('game_start_time', parse_date, lambda x: x['times']['game']['start']),
         ('game_end_time', parse_date, lambda x: x['times']['game']['end']),
         ('slot_start_time', parse_date, lambda x: x['times']['slot']['start']),
-        ('slot_end_time', parse_date, lambda x: x['times']['slot']['end'])
+        ('slot_end_time', parse_date, lambda x: x['times']['slot']['end']),
     ]
 
     # check for unknown filters
@@ -320,7 +322,7 @@ def match_periods():
         if match_period.matches:
             data['matches'] = {
                 'first_num': match_num(match_period, 0),
-                'last_num': match_num(match_period, -1)
+                'last_num': match_num(match_period, -1),
             }
         periods.append(data)
 
@@ -391,7 +393,7 @@ def error_handler(e):
     error = {
         'name': type(e).__name__,
         'description': e.description,
-        'code': e.code
+        'code': e.code,
     }
 
     # not all errors will have details

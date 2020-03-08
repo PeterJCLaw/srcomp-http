@@ -93,7 +93,7 @@ def match_json_info(comp, match):
         "times": {
             "slot": {
                 "start": match.start_time.isoformat(),
-                "end": match.end_time.isoformat()
+                "end": match.end_time.isoformat(),
             },
             "game": {
                 "start": (
@@ -104,7 +104,7 @@ def match_json_info(comp, match):
                     match.start_time
                     + match_slot_lengths['pre']
                     + match_slot_lengths['match']
-                ).isoformat()
+                ).isoformat(),
             },
             'staging': {
                 'opens': staging_times['opens'].isoformat(),
@@ -115,7 +115,7 @@ def match_json_info(comp, match):
                     for area, time in staging_times['signal_shepherds'].items()
                 },
             },
-        }
+        },
     }
 
     score_info = get_scores(comp.scores, match)
