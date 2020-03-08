@@ -425,12 +425,12 @@ def test_periods():
     ]})
 
 
-@freeze_time('2014-04-26 12:01:00') # UTC
+@freeze_time('2014-04-26 12:01:00')  # UTC
 def test_current_time():
     eq_(server_get('/current')['time'],
         '2014-04-26T13:01:00+01:00')
 
-@freeze_time('2014-04-26 12:30:00') # UTC
+@freeze_time('2014-04-26 12:30:00')  # UTC
 def test_current_delay():
     eq_(server_get('/current')['delay'], 15)
 
@@ -494,31 +494,31 @@ MATCH_0 = [{'num': 0,
                },
             }}]
 
-@freeze_time('2014-04-26 11:55:00') # UTC
+@freeze_time('2014-04-26 11:55:00')  # UTC
 def test_current_shepherding_match_none():
     match_list = server_get('/current')['shepherding_matches']
     match_list.sort(key=lambda match: match['arena'])
     eq_(match_list, [])
 
-@freeze_time('2014-04-26 11:58:00') # UTC
+@freeze_time('2014-04-26 11:58:00')  # UTC
 def test_current_shepherding_match():
     match_list = server_get('/current')['shepherding_matches']
     match_list.sort(key=lambda match: match['arena'])
     eq_(match_list, MATCH_0)
 
-@freeze_time('2014-04-26 11:55:00') # UTC
+@freeze_time('2014-04-26 11:55:00')  # UTC
 def test_current_staging_match_none():
     match_list = server_get('/current')['staging_matches']
     match_list.sort(key=lambda match: match['arena'])
     eq_(match_list, [])
 
-@freeze_time('2014-04-26 11:57:00') # UTC
+@freeze_time('2014-04-26 11:57:00')  # UTC
 def test_current_staging_match():
     match_list = server_get('/current')['staging_matches']
     match_list.sort(key=lambda match: match['arena'])
     eq_(match_list, MATCH_0)
 
-@freeze_time('2014-04-26 12:01:00') # UTC
+@freeze_time('2014-04-26 12:01:00')  # UTC
 def test_current_match():
     match_list = server_get('/current')['matches']
     match_list.sort(key=lambda match: match['arena'])
