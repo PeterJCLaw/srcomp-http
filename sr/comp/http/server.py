@@ -211,6 +211,7 @@ def state():
 
 
 def get_config_dict(comp):
+    LIBRARIES = ('sr.comp', 'sr.comp.http', 'sr.comp.ranker', 'league_ranker', 'flask')
     return {
         'match_slots': {
             k: int(v.total_seconds())
@@ -218,7 +219,7 @@ def get_config_dict(comp):
         },
         'server': {
             library: working_set.by_key[library].version
-            for library in ('sr.comp', 'sr.comp.http', 'sr.comp.ranker', 'league_ranker', 'flask')
+            for library in LIBRARIES
             if library in working_set.by_key
         },
         'ping_period': 10
