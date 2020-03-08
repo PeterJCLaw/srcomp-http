@@ -1,4 +1,4 @@
-import mock
+from unittest import mock
 
 from sr.comp.http.query_utils import get_scores
 from sr.comp.match_period import Match, MatchType

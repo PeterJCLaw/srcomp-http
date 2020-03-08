@@ -1,5 +1,4 @@
-
-import mock
+from unittest import mock
 import os.path
 
 from sr.comp.http.manager import update_lock, LOCK_FILE

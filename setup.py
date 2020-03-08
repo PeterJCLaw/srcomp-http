@@ -32,7 +32,6 @@ setup(
     tests_require=[
         'nose >=1.3, <2',
         'freezegun >=0.2.8, <0.4',
-        'mock >=1.0.1, <2',
     ],
     classifiers=[
         'Intended Audience :: Developers',
