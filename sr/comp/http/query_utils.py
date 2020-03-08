@@ -97,13 +97,13 @@ def match_json_info(comp, match):
             },
             "game": {
                 "start": (
-                    match.start_time +
-                    match_slot_lengths['pre']
+                    match.start_time
+                    + match_slot_lengths['pre']
                 ).isoformat(),
                 "end": (
-                    match.start_time +
-                    match_slot_lengths['pre'] +
-                    match_slot_lengths['match']
+                    match.start_time
+                    + match_slot_lengths['pre']
+                    + match_slot_lengths['match']
                 ).isoformat()
             },
             'staging': {
