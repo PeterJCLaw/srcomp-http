@@ -33,6 +33,12 @@ setup(
         'freezegun >=0.2.8, <0.4',
         'mock >=1.0.1, <2',
     ],
+    classifiers=[
+        'Intended Audience :: Developers',
+        'Intended Audience :: System Administrators',
+        'Operating System :: POSIX :: Linux',
+        'Topic :: Internet :: WWW/HTTP',
+    ],
     test_suite='nose.collector',
     zip_safe=True,
 )
