@@ -32,11 +32,9 @@ def get_scores(scores, match):
         if match.type == MatchType.knockout:
             scores_info = scores.knockout
             if match.use_resolved_ranking:
-                ranking = scores_info.resolved_positions.__getitem__
-            else:
-                # Just the Finals
-                ranking = lambda k: degroup(scores_info.game_positions[k])
-            return scores_info, ranking
+                return scores_info, scores_info.resolved_positions.__getitem__
+            # Just the Finals
+            return scores_info, lambda k: degroup(scores_info.game_positions[k])
 
         elif match.type == MatchType.tiebreaker:
             scores_info = scores.tiebreaker
