@@ -10,6 +10,7 @@ BOLD = '\033[1m'
 FAIL = '\033[91m'
 ENDC = '\033[0m'
 
+
 def add_arguments(parser):
     parser.add_argument("compstate", help="Competition state git repository path")
     rev_help = "Target revision to update to (default: {})".format(DEFAULT_REVISION)
@@ -19,6 +20,7 @@ def add_arguments(parser):
         nargs='?',
         help=rev_help,
     )
+
 
 def run_update(args):
     compstate = RawCompstate(args.compstate, local_only=True)
@@ -38,12 +40,14 @@ def run_update(args):
     with update_lock(args.compstate):
         compstate.checkout(revision)
 
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
     add_arguments(parser)
     args = parser.parse_args()
     run_update(args)
+
 
 if __name__ == '__main__':
     main()

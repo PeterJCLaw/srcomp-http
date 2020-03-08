@@ -2,6 +2,7 @@
 
 from sr.comp.match_period import MatchType
 
+
 def get_scores(scores, match):
     """
     Get a scores object suitable for JSON output.

@@ -93,6 +93,7 @@ def locations():
         for name, location in comp.venue.locations.items()
     })
 
+
 @app.route('/locations/<name>')
 def get_location(name):
     comp = g.comp_man.get_comp()
