@@ -1,13 +1,12 @@
-from functools import wraps
 import json
 import os.path
+from functools import wraps
 
 from flask.testing import FlaskClient
 from freezegun import freeze_time
-from nose.tools import eq_, raises
+from nose.tools import eq_
 
 from sr.comp.http import app
-
 
 COMPSTATE = os.path.join(os.path.dirname(__file__), 'dummy')
 app.config['COMPSTATE'] = COMPSTATE

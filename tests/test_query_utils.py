@@ -3,7 +3,6 @@ from unittest import mock
 from sr.comp.http.query_utils import get_scores
 from sr.comp.match_period import Match, MatchType
 
-
 GAME_POINTS_DUMMY = 'test game_points for: '
 POSITIONS_DUMMY = 'test positions for: '
 RANKED_DUMMY = 'test ranked for: '

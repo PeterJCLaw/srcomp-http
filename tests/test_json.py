@@ -1,11 +1,7 @@
-
-from collections import namedtuple
 from enum import Enum
-import json
-
-from nose.tools import raises
 
 from sr.comp.http.json_encoder import JsonEncoder
+
 
 def get_encoder():
     return JsonEncoder(

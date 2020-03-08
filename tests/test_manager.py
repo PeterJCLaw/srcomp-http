@@ -1,7 +1,8 @@
-from unittest import mock
 import os.path
+from unittest import mock
 
-from sr.comp.http.manager import update_lock, LOCK_FILE
+from sr.comp.http.manager import LOCK_FILE, update_lock
+
 
 def test_update_lock():
     mock_excl_fd = mock.MagicMock()

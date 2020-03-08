@@ -1,6 +1,7 @@
-from nose.tools import eq_, raises
+from nose.tools import raises
 
 from sr.comp.http.query_utils import parse_difference_string
+
 
 def test_exact_equal():
     assert parse_difference_string('4')(4)
