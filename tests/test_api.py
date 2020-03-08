@@ -787,7 +787,7 @@ def test_knockouts():
     for r in actual_rounds:
         for m in r:
             assert 'times' in m
-            keys = list(sorted(m['times'].keys()))
+            keys = sorted(m['times'].keys())
             assert times_keys == keys, "Wrong time keys in {0}.".format(m)
             m['times'] = None
 
