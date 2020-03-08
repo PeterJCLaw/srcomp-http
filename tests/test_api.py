@@ -112,8 +112,7 @@ def test_root():
 
 def test_state():
     state_val = server_get('/state')['state']
-    unicode = type(u'') # Python 2/3 hack
-    assert isinstance(state_val, unicode), repr(state_val)
+    assert state_val != ''
 
 
 def test_corner():
