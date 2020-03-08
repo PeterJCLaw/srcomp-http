@@ -1,6 +1,5 @@
 import datetime
 import os.path
-from functools import partial
 
 import dateutil.parser
 import dateutil.tz
@@ -338,10 +337,10 @@ def current_state():
     delay = comp.schedule.delay_at(time)
     delay_seconds = int(delay.total_seconds())
 
-    matches = list(map(
-        partial(match_json_info, comp),
-        comp.schedule.matches_at(time),
-    ))
+    matches = [
+        match_json_info(comp, x)
+        for x in comp.schedule.matches_at(time)
+    ]
 
     staging_matches = []
     shepherding_matches = []
