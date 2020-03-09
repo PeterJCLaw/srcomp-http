@@ -40,7 +40,6 @@ Requirements
 -  python-dateutil
 -  simplejson
 -  nose (for testing)
--  mock (for testing)
 
 Don't forget to also check the requirements for SRComp!
 
