@@ -47,4 +47,4 @@ Don't forget to also check the requirements for SRComp!
    :target: https://travis-ci.org/PeterJCLaw/srcomp-http
 
 .. |Docs Status| image:: https://readthedocs.org/projects/srcomp-http/badge/?version=latest
-   :target: http://srcomp-http.readthedocs.org/
+   :target: https://srcomp-http.readthedocs.org/
