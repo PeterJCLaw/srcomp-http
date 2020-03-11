@@ -5,7 +5,7 @@ with open('README.rst') as f:
 
 setup(
     name='sr.comp.http',
-    version='1.1.1',
+    version='1.2.0',
     packages=find_packages(exclude=('tests',)),
     namespace_packages=['sr', 'sr.comp'],
     package_data={'sr.comp.http': ['logging-*.ini']},
@@ -13,7 +13,7 @@ setup(
     author="Student Robotics Competition Software SIG",
     author_email="srobo-devel@googlegroups.com",
     install_requires=[
-        'sr.comp >=1.1, <2',
+        'sr.comp >=1.2, <2',
         'six >=1.8, <2',
         'Flask >=1.0, <2',
         'simplejson >=3.6, <4',
