@@ -47,5 +47,5 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: WSGI :: Application',
     ],
     test_suite='nose.collector',
-    zip_safe=True,
+    zip_safe=False,
 )
