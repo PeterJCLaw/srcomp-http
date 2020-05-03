@@ -19,14 +19,9 @@ class JsonEncoder(flask.json.JSONEncoder):
         # works.
         # In an ideal world, the types we deal with in 'default' would have
         # approriate '_asdict' methods.
-        kwargs.pop('namedtuple_as_object')
-        kwargs.pop('tuple_as_array')
-        super().__init__(
-            *args,
-            namedtuple_as_object=False,
-            tuple_as_array=False,
-            **kwargs,
-        )
+        kwargs['namedtuple_as_object'] = False
+        kwargs['tuple_as_array'] = False
+        super().__init__(*args, **kwargs)
 
     def default(self, obj):
         if isinstance(obj, Enum):
