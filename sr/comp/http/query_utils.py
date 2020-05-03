@@ -1,6 +1,7 @@
 """Various utils for working with HTTP."""
 
 from sr.comp.match_period import MatchType
+from sr.comp.scores import degroup
 
 
 def get_scores(scores, match):
@@ -20,13 +21,6 @@ def get_scores(scores, match):
         A dictionary suitable for JSON output.
     """
     k = (match.arena, match.num)
-
-    def degroup(grouped_positions):
-        positions = {}
-        for pos, teams in grouped_positions.items():
-            for tla in teams:
-                positions[tla] = pos
-        return positions
 
     def get_scores_info(match):
         if match.type == MatchType.knockout:
