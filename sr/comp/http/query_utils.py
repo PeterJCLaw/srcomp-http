@@ -2,30 +2,81 @@
 
 import datetime
 from typing import (
-    Any,
     Callable,
     Dict,
-    NewType,
+    List,
+    Mapping,
     Optional,
     overload,
     Tuple,
     TypeVar,
     Union,
 )
+from typing_extensions import TypedDict
 
-from league_ranker import RankedPosition
+from league_ranker import LeaguePoints, RankedPosition
 
 from sr.comp.comp import SRComp
 from sr.comp.match_period import Match, MatchType
 from sr.comp.scores import BaseScores, degroup, Scores
-from sr.comp.types import MatchId, TLA
+from sr.comp.types import (
+    ArenaName,
+    GamePoints,
+    MatchId,
+    MatchNumber,
+    ShepherdName,
+    TLA,
+)
 
-# TODO: use a TypedDict here?
-MatchInfo = NewType('MatchInfo', Dict[str, Any])
+LeagueMatchScore = TypedDict('LeagueMatchScore', {
+    'game': Mapping[TLA, GamePoints],
+    'normalised': Dict[TLA, LeaguePoints],
+    'ranking': Dict[TLA, RankedPosition],
+})
+KnockoutMatchScore = TypedDict('KnockoutMatchScore', {
+    'game': Mapping[TLA, GamePoints],
+    'league': Dict[TLA, LeaguePoints],
+    'ranking': Dict[TLA, RankedPosition],
+})
+MatchScore = Union[LeagueMatchScore, KnockoutMatchScore]
+
+Times = TypedDict('Times', {
+    'start': str,
+    'end': str,
+})
+StagingTimes = TypedDict('StagingTimes', {
+    'opens': str,
+    'closes': str,
+    'signal_teams': str,
+    'signal_shepherds': Dict[ShepherdName, str],
+})
+MatchTimings = TypedDict('MatchTimings', {
+    'slot': Times,
+    'game': Times,
+    'staging': StagingTimes,
+})
+MatchInfo = TypedDict('MatchInfo', {
+    'num': MatchNumber,
+    'display_name': str,
+    'arena': ArenaName,
+    'teams': List[Optional[TLA]],
+    'type': str,
+    'times': MatchTimings,
+})
+ScoredMatchInfo = TypedDict('ScoredMatchInfo', {
+    'num': MatchNumber,
+    'display_name': str,
+    'arena': ArenaName,
+    'teams': List[Optional[TLA]],
+    'type': str,
+    'times': MatchTimings,
+    'scores': MatchScore,
+})
+
 TParseable = TypeVar('TParseable', int, str, datetime.datetime)
 
 
-def get_scores(scores: Scores, match: Match) -> Optional[Dict[str, Any]]:
+def get_scores(scores: Scores, match: Match) -> Optional[MatchScore]:
     """
     Get a scores object suitable for JSON output.
 
@@ -82,7 +133,7 @@ def get_scores(scores: Scores, match: Match) -> Optional[Dict[str, Any]]:
     return None
 
 
-def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
+def match_json_info(comp: SRComp, match: Match) -> Union[MatchInfo, ScoredMatchInfo]:
     """
     Get match JSON information.
 
@@ -101,7 +152,7 @@ def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
     match_slot_lengths = comp.schedule.match_slot_lengths
     staging_times = comp.schedule.get_staging_times(match)
 
-    info = {
+    info = MatchInfo({
         'num': match.num,
         'display_name': match.display_name,
         'arena': match.arena,
@@ -133,13 +184,24 @@ def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
                 },
             },
         },
-    }
+    })
 
     score_info = get_scores(comp.scores, match)
     if score_info:
-        info['scores'] = score_info
+        # TODO: once we're on Python 3.6+ we should be able to move to
+        # class-based TypedDicts and thus make use of the totality flag, rather
+        # than do this duplication.
+        return ScoredMatchInfo({
+            'scores': score_info,
+            'num': info['num'],
+            'display_name': info['display_name'],
+            'arena': info['arena'],
+            'teams': info['teams'],
+            'type': info['type'],
+            'times': info['times'],
+        })
 
-    return MatchInfo(info)
+    return info
 
 
 @overload

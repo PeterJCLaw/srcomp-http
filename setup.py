@@ -18,6 +18,7 @@ setup(
         'Flask >=1.0, <2',
         'simplejson >=3.6, <4',
         'python-dateutil >=2.2, <3',
+        'typing-extensions >=3.7.4.2, <4',
     ],
     python_requires='>=3.5',
     setup_requires=[
