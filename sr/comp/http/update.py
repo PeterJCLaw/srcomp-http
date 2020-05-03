@@ -2,6 +2,8 @@
 
 """Update the given compstate repo in a safe manner."""
 
+import argparse
+
 from sr.comp.http.manager import update_lock
 from sr.comp.raw_compstate import RawCompstate
 
@@ -11,7 +13,7 @@ FAIL = '\033[91m'
 ENDC = '\033[0m'
 
 
-def add_arguments(parser):
+def add_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("compstate", help="Competition state git repository path")
     rev_help = "Target revision to update to (default: {})".format(DEFAULT_REVISION)
     parser.add_argument(
@@ -22,7 +24,7 @@ def add_arguments(parser):
     )
 
 
-def run_update(args):
+def run_update(args: argparse.Namespace) -> None:
     compstate = RawCompstate(args.compstate, local_only=True)
     revision = args.revision
 
@@ -41,7 +43,7 @@ def run_update(args):
         compstate.checkout(revision)
 
 
-def main():
+def main() -> None:
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
     add_arguments(parser)

@@ -6,7 +6,7 @@ from sr.comp.http.manager import LOCK_FILE, update_lock
 
 
 class ManagerTests(unittest.TestCase):
-    def test_update_lock(self):
+    def test_update_lock(self) -> None:
         mock_excl_fd = mock.MagicMock()
         mock_excl_lock = mock.Mock(return_value=mock_excl_fd)
 
@@ -28,7 +28,7 @@ class ManagerTests(unittest.TestCase):
             )
             mock_touch.assert_called_with('foo')
 
-    def test_update_lock_when_exception(self):
+    def test_update_lock_when_exception(self) -> None:
         mock_excl_fd = mock.MagicMock()
         mock_excl_lock = mock.Mock(return_value=mock_excl_fd)
 

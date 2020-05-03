@@ -1,10 +1,31 @@
 """Various utils for working with HTTP."""
 
-from sr.comp.match_period import MatchType
-from sr.comp.scores import degroup
+import datetime
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    NewType,
+    Optional,
+    overload,
+    Tuple,
+    TypeVar,
+    Union,
+)
+
+from league_ranker import RankedPosition
+
+from sr.comp.comp import SRComp
+from sr.comp.match_period import Match, MatchType
+from sr.comp.scores import BaseScores, degroup, Scores
+from sr.comp.types import MatchId, TLA
+
+# TODO: use a TypedDict here?
+MatchInfo = NewType('MatchInfo', Dict[str, Any])
+TParseable = TypeVar('TParseable', int, str, datetime.datetime)
 
 
-def get_scores(scores, match):
+def get_scores(scores: Scores, match: Match) -> Optional[Dict[str, Any]]:
     """
     Get a scores object suitable for JSON output.
 
@@ -22,7 +43,10 @@ def get_scores(scores, match):
     """
     k = (match.arena, match.num)
 
-    def get_scores_info(match):
+    def get_scores_info(match: Match) -> Union[
+        Tuple[BaseScores, Callable[[MatchId], Dict[TLA, RankedPosition]]],
+        Tuple[None, None],
+    ]:
         if match.type == MatchType.knockout:
             scores_info = scores.knockout
             if match.use_resolved_ranking:
@@ -39,7 +63,7 @@ def get_scores(scores, match):
             return None, None
 
     scores_info, ranking = get_scores_info(match)
-    if scores_info and k in scores_info.game_points:
+    if scores_info and ranking and k in scores_info.game_points:
         return {
             "game": scores_info.game_points[k],
             "normalised": scores_info.ranked_points[k],
@@ -58,7 +82,7 @@ def get_scores(scores, match):
     return None
 
 
-def match_json_info(comp, match):
+def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
     """
     Get match JSON information.
 
@@ -115,10 +139,29 @@ def match_json_info(comp, match):
     if score_info:
         info['scores'] = score_info
 
-    return info
+    return MatchInfo(info)
 
 
-def parse_difference_string(string, type_converter=int):
+@overload
+def parse_difference_string(
+    string: str,
+    type_converter: Callable[[str], TParseable],
+) -> Callable[[TParseable], bool]:
+    ...
+
+
+@overload
+def parse_difference_string(
+    string: str,
+    type_converter: Callable[[str], int] = int,
+) -> Callable[[int], bool]:
+    ...
+
+
+def parse_difference_string(
+    string: str,
+    type_converter: Callable[[str], TParseable] = int,  # type: ignore[assignment]
+) -> Callable[[TParseable], bool]:
     """
     Parse a difference string (x..x, ..x, x.., x) and return a function that
     accepts a single argument and returns ``True`` if it is in the difference.

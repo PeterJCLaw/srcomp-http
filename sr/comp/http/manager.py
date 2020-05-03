@@ -6,6 +6,7 @@ import fcntl
 import logging
 import os
 import time
+from typing import IO, Iterator, Optional
 
 from sr.comp.comp import SRComp
 
@@ -13,21 +14,21 @@ LOCK_FILE = ".update-lock"
 UPDATE_FILE = ".update-pls"
 
 
-def update_lock_path(compstate_path):
+def update_lock_path(compstate_path: str) -> str:
     return os.path.join(compstate_path, LOCK_FILE)
 
 
-def update_pls_path(compstate_path):
+def update_pls_path(compstate_path: str) -> str:
     return os.path.join(compstate_path, UPDATE_FILE)
 
 
-def exclusive_lock(lock_path):
+def exclusive_lock(lock_path: str) -> IO[str]:
     fd = open(lock_path, "w")
     fcntl.lockf(fd, fcntl.LOCK_EX)
     return fd
 
 
-def share_lock(lock_path):
+def share_lock(lock_path: str) -> IO[str]:
     try:
         fd = open(lock_path, "r")
     except IOError as ioe:
@@ -41,13 +42,13 @@ def share_lock(lock_path):
     return fd
 
 
-def touch_update_file(compstate_path):
+def touch_update_file(compstate_path: str) -> None:
     file_path = update_pls_path(compstate_path)
     open(file_path, 'w').close()
 
 
 @contextlib.contextmanager
-def update_lock(compstate_path):
+def update_lock(compstate_path: str) -> Iterator[None]:
     """
     Acquire a lock on the given compstate for the purposes of updating it.
 
@@ -65,19 +66,19 @@ def update_lock(compstate_path):
 class SRCompManager:
     """An ``SRComp`` manager."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.root_dir = "./"
 
-        self.update_time = None
+        self.update_time = None  # type: Optional[float]
         """The last time we updated our information."""
 
-        self._update_pls_time = None
+        self._update_pls_time = None  # type: Optional[float]
         """The time the update pls file was last modified."""
 
-        self._comp = None
+        self._comp = None  # type: Optional[SRComp]
         """Cached SRComp instance."""
 
-    def _load(self):
+    def _load(self) -> None:
         lock_path = update_lock_path(self.root_dir)
         with share_lock(lock_path):
             # Grab a lock & reload
@@ -85,7 +86,7 @@ class SRCompManager:
             self._comp = SRComp(self.root_dir)
             self.update_time = time.time()
 
-    def _state_changed(self):
+    def _state_changed(self) -> bool:
         update_path = update_pls_path(self.root_dir)
         try:
             new_time = os.path.getmtime(update_path)
@@ -100,7 +101,7 @@ class SRCompManager:
 
         return False
 
-    def get_comp(self):
+    def get_comp(self) -> SRComp:
         if self.update_time is None:
             self._load()
 
@@ -108,4 +109,5 @@ class SRCompManager:
             # data is more than 5 seconds old and the state has changed, reload
             self._load()
 
+        assert self._comp is not None
         return self._comp

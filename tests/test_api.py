@@ -2,11 +2,14 @@ import contextlib
 import json
 import os.path
 import unittest
+from typing import Any, Iterable, Iterator, Mapping, Tuple
 
 from flask.testing import FlaskClient
 from freezegun import freeze_time  # type: ignore[import]
 
 from sr.comp.http import app
+
+FlaskTestResponse = Tuple[Iterable[bytes], str, Mapping[str, str]]
 
 COMPSTATE = os.path.join(os.path.dirname(__file__), 'dummy')
 app.config['COMPSTATE'] = COMPSTATE
@@ -78,16 +81,16 @@ MATCH_0 = [
 
 
 class ApiError(Exception):
-    def __init__(self, name, code):
+    def __init__(self, name: str, code: int) -> None:
         self.name = name
         self.code = code
 
 
 class ApiTests(unittest.TestCase):
-    def server_get(self, endpoint):
-        response, code, header = self.client.get(endpoint)
+    def server_get(self, endpoint: str) -> Any:
+        response, status, header = self.client.get(endpoint)
         json_response = json.loads(b''.join(response).decode('UTF-8'))
-        code = int(code.split(' ')[0])
+        code = int(status.split(' ')[0])
 
         if 200 <= code <= 299:
             return json_response
@@ -101,16 +104,16 @@ class ApiTests(unittest.TestCase):
             raise AssertionError()  # server error
 
     @contextlib.contextmanager
-    def assertRaisesApiError(self, name, code):
+    def assertRaisesApiError(self, name: str, code: int) -> Iterator[None]:
         with self.assertRaises(ApiError) as cm:
             yield
 
         self.assertEqual(name, cm.exception.name)
         self.assertEqual(code, cm.exception.code)
 
-    def setUp(self):
+    def setUp(self) -> None:
         super().setUp()
-        self.client = FlaskClient(app)
+        self.client = FlaskClient(app)  # type: FlaskClient[FlaskTestResponse]
 
     def test_endpoints(self) -> None:
         endpoints = [
