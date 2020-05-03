@@ -65,18 +65,18 @@ def get_scores(scores: Scores, match: Match) -> Optional[Dict[str, Any]]:
     scores_info, ranking = get_scores_info(match)
     if scores_info and ranking and k in scores_info.game_points:
         return {
-            "game": scores_info.game_points[k],
-            "normalised": scores_info.ranked_points[k],
-            "ranking": ranking(k),
+            'game': scores_info.game_points[k],
+            'normalised': scores_info.ranked_points[k],
+            'ranking': ranking(k),
         }
 
     # TODO: consider using 'normalised' for both, instead of 'league' below
     league = scores.league
     if k in league.game_points:
         return {
-            "game": league.game_points[k],
-            "league": league.ranked_points[k],
-            "ranking": degroup(league.game_positions[k]),
+            'game': league.game_points[k],
+            'league': league.ranked_points[k],
+            'ranking': degroup(league.game_positions[k]),
         }
 
     return None
@@ -102,22 +102,22 @@ def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
     staging_times = comp.schedule.get_staging_times(match)
 
     info = {
-        "num": match.num,
+        'num': match.num,
         'display_name': match.display_name,
-        "arena": match.arena,
-        "teams": match.teams,
-        "type": match.type.value,
-        "times": {
-            "slot": {
-                "start": match.start_time.isoformat(),
-                "end": match.end_time.isoformat(),
+        'arena': match.arena,
+        'teams': match.teams,
+        'type': match.type.value,
+        'times': {
+            'slot': {
+                'start': match.start_time.isoformat(),
+                'end': match.end_time.isoformat(),
             },
-            "game": {
-                "start": (
+            'game': {
+                'start': (
                     match.start_time +
                     match_slot_lengths['pre']
                 ).isoformat(),
-                "end": (
+                'end': (
                     match.start_time +
                     match_slot_lengths['pre'] +
                     match_slot_lengths['match']
