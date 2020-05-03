@@ -40,6 +40,7 @@ def get_scores(scores, match):
             scores_info = scores.tiebreaker
             return scores_info, \
                 lambda k: degroup(scores_info.game_positions[k])
+
         else:
             return None, None
 
