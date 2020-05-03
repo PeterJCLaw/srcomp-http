@@ -4,7 +4,7 @@ import os.path
 import unittest
 
 from flask.testing import FlaskClient
-from freezegun import freeze_time
+from freezegun import freeze_time  # type: ignore[import]
 
 from sr.comp.http import app
 
@@ -108,7 +108,7 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(name, cm.exception.name)
         self.assertEqual(code, cm.exception.code)
 
-    def setUp(self) -> None:
+    def setUp(self):
         super().setUp()
         self.client = FlaskClient(app)
 
