@@ -1,3 +1,4 @@
+import unittest
 from unittest import mock
 
 from sr.comp.http.query_utils import get_scores
@@ -48,70 +49,66 @@ def build_match(
     )
 
 
-def test_league_match():
-    scores = build_scores()
-    info = get_scores(scores, build_match(
-        num=0,
-        arena='A',
-        type_=MatchType.league,
-    ))
-    expected = {
-        "game": GAME_POINTS_DUMMY + "('A', 0)",
-        "league": RANKED_DUMMY + "('A', 0)",
-        "ranking": {POSITIONS_DUMMY + "'A'": 0},
-    }
-    assert expected == info
+class QueryUtilsTests(unittest.TestCase):
+    def test_league_match(self) -> None:
+        scores = build_scores()
+        info = get_scores(scores, build_match(
+            num=0,
+            arena='A',
+            type_=MatchType.league,
+        ))
+        expected = {
+            "game": GAME_POINTS_DUMMY + "('A', 0)",
+            "league": RANKED_DUMMY + "('A', 0)",
+            "ranking": {POSITIONS_DUMMY + "'A'": 0},
+        }
+        self.assertEqual(expected, info)
 
+    def test_knockout_match(self) -> None:
+        scores = build_scores()
+        info = get_scores(scores, build_match(
+            num=1,
+            arena='A',
+            type_=MatchType.knockout,
+            use_resolved_ranking=True,
+        ))
+        expected = {
+            "game": GAME_POINTS_DUMMY + "('A', 1)",
+            "normalised": RANKED_DUMMY + "('A', 1)",
+            "ranking": {RESOLVED_DUMMY + "'A'": 1},
+        }
+        self.assertEqual(expected, info)
 
-def test_knockout_match():
-    scores = build_scores()
-    info = get_scores(scores, build_match(
-        num=1,
-        arena='A',
-        type_=MatchType.knockout,
-        use_resolved_ranking=True,
-    ))
-    expected = {
-        "game": GAME_POINTS_DUMMY + "('A', 1)",
-        "normalised": RANKED_DUMMY + "('A', 1)",
-        "ranking": {RESOLVED_DUMMY + "'A'": 1},
-    }
-    assert expected == info
+    def test_finals_match(self) -> None:
+        scores = build_scores()
+        info = get_scores(scores, build_match(
+            num=1,
+            arena='A',
+            type_=MatchType.knockout,
+            use_resolved_ranking=False,
+        ))
+        expected = {
+            "game": GAME_POINTS_DUMMY + "('A', 1)",
+            "normalised": RANKED_DUMMY + "('A', 1)",
+            "ranking": {POSITIONS_DUMMY + "'A'": 1},
+        }
+        self.assertEqual(expected, info)
 
+    def test_tiebreaker_match(self) -> None:
+        scores = build_scores()
+        info = get_scores(scores, build_match(
+            num=2,
+            arena='A',
+            type_=MatchType.tiebreaker,
+        ))
+        expected = {
+            "game": GAME_POINTS_DUMMY + "('A', 2)",
+            "normalised": RANKED_DUMMY + "('A', 2)",
+            "ranking": {POSITIONS_DUMMY + "'A'": 2},
+        }
+        self.assertEqual(expected, info)
 
-def test_finals_match():
-    scores = build_scores()
-    info = get_scores(scores, build_match(
-        num=1,
-        arena='A',
-        type_=MatchType.knockout,
-        use_resolved_ranking=False,
-    ))
-    expected = {
-        "game": GAME_POINTS_DUMMY + "('A', 1)",
-        "normalised": RANKED_DUMMY + "('A', 1)",
-        "ranking": {POSITIONS_DUMMY + "'A'": 1},
-    }
-    assert expected == info
-
-
-def test_tiebreaker_match():
-    scores = build_scores()
-    info = get_scores(scores, build_match(
-        num=2,
-        arena='A',
-        type_=MatchType.tiebreaker,
-    ))
-    expected = {
-        "game": GAME_POINTS_DUMMY + "('A', 2)",
-        "normalised": RANKED_DUMMY + "('A', 2)",
-        "ranking": {POSITIONS_DUMMY + "'A'": 2},
-    }
-    assert expected == info
-
-
-def test_no_match():
-    scores = build_scores()
-    info = get_scores(scores, build_match(num=1, arena='B'))
-    expected = None
-    assert expected == info
+    def test_no_match(self) -> None:
+        scores = build_scores()
+        info = get_scores(scores, build_match(num=1, arena='B'))
+        self.assertIsNone(info)

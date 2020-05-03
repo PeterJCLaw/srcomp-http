@@ -1,54 +1,60 @@
 import os.path
+import unittest
 from unittest import mock
 
 from sr.comp.http.manager import LOCK_FILE, update_lock
 
 
-def test_update_lock():
-    mock_excl_fd = mock.MagicMock()
-    mock_excl_lock = mock.Mock(return_value=mock_excl_fd)
+class ManagerTests(unittest.TestCase):
+    def test_update_lock(self):
+        mock_excl_fd = mock.MagicMock()
+        mock_excl_lock = mock.Mock(return_value=mock_excl_fd)
 
-    with mock.patch(
-        'sr.comp.http.manager.exclusive_lock',
-        mock_excl_lock,
-    ), mock.patch(
-        'sr.comp.http.manager.touch_update_file',
-    ) as mock_touch:
-        with update_lock('foo'):
-            expected_lock_file = os.path.join('foo', LOCK_FILE)
-            mock_excl_lock.assert_called_with(expected_lock_file)
-
-            mock_excl_fd.__enter__.assert_called_with()
-
-        assert mock_excl_fd.__exit__.called, "Failed to release the lock file"
-        mock_touch.assert_called_with('foo')
-
-
-def test_update_lock_when_exception():
-    mock_excl_fd = mock.MagicMock()
-    mock_excl_lock = mock.Mock(return_value=mock_excl_fd)
-
-    class FakeError(Exception):
-        pass
-
-    with mock.patch(
-        'sr.comp.http.manager.exclusive_lock',
-        mock_excl_lock,
-    ), mock.patch(
-        'sr.comp.http.manager.touch_update_file',
-    ) as mock_touch:
-        try:
+        with mock.patch(
+            'sr.comp.http.manager.exclusive_lock',
+            mock_excl_lock,
+        ), mock.patch(
+            'sr.comp.http.manager.touch_update_file',
+        ) as mock_touch:
             with update_lock('foo'):
                 expected_lock_file = os.path.join('foo', LOCK_FILE)
                 mock_excl_lock.assert_called_with(expected_lock_file)
 
                 mock_excl_fd.__enter__.assert_called_with()
 
-                raise FakeError()
-        except FakeError:
-            pass
-        else:
-            assert False, "Should have bubbled exception"
+            self.assertTrue(
+                mock_excl_fd.__exit__.called,
+                "Failed to release the lock file",
+            )
+            mock_touch.assert_called_with('foo')
 
-        assert mock_excl_fd.__exit__.called, "Failed to release the lock file"
-        assert not mock_touch.called, "Should not touch the update file on failure"
+    def test_update_lock_when_exception(self):
+        mock_excl_fd = mock.MagicMock()
+        mock_excl_lock = mock.Mock(return_value=mock_excl_fd)
+
+        class FakeError(Exception):
+            pass
+
+        with mock.patch(
+            'sr.comp.http.manager.exclusive_lock',
+            mock_excl_lock,
+        ), mock.patch(
+            'sr.comp.http.manager.touch_update_file',
+        ) as mock_touch:
+            with self.assertRaises(FakeError):
+                with update_lock('foo'):
+                    expected_lock_file = os.path.join('foo', LOCK_FILE)
+                    mock_excl_lock.assert_called_with(expected_lock_file)
+
+                    mock_excl_fd.__enter__.assert_called_with()
+
+                    raise FakeError()
+
+            self.assertTrue(
+                mock_excl_fd.__exit__.called,
+                "Failed to release the lock file",
+            )
+            self.assertFalse(
+                mock_touch.called,
+                "Should not touch the update file on failure",
+            )

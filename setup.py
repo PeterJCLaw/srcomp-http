@@ -29,7 +29,6 @@ setup(
         ],
     },
     tests_require=[
-        'nose >=1.3, <2',
         'freezegun >=0.2.8, <0.4',
     ],
     classifiers=[
@@ -46,6 +45,6 @@ setup(
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: WSGI :: Application',
     ],
-    test_suite='nose.collector',
+    test_suite='tests',
     zip_safe=False,
 )
