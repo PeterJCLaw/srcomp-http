@@ -1,4 +1,4 @@
-from setuptools import find_packages, setup
+from setuptools import find_namespace_packages, setup
 
 with open('README.rst') as f:
     long_description = f.read()
@@ -6,7 +6,7 @@ with open('README.rst') as f:
 setup(
     name='sr.comp.http',
     version='1.2.0',
-    packages=find_packages(exclude=('tests',)),
+    packages=find_namespace_packages(exclude=('tests',)),
     namespace_packages=['sr', 'sr.comp'],
     package_data={'sr.comp.http': ['logging-*.ini']},
     long_description=long_description,
