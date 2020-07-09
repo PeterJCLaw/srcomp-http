@@ -14,7 +14,6 @@ setup(
     author_email="srobo-devel@googlegroups.com",
     install_requires=[
         'sr.comp >=1.2, <2',
-        'six >=1.8, <2',
         'Flask >=1.0, <2',
         'simplejson >=3.6, <4',
         'python-dateutil >=2.2, <3',
