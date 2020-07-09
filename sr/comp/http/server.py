@@ -87,8 +87,10 @@ def get_arena(name: str) -> str:
 
 
 def format_location(location: Region) -> Dict[str, Any]:
-    data = {'get': url_for('get_location', name=location['name'])}
-    data.update(location)
+    data = {
+        'get': url_for('get_location', name=location['name']),
+        **location,
+    }  # type: Dict[str, Any]
     del data['name']
     return data
 
