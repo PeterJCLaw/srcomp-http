@@ -11,5 +11,5 @@
         "**/.eggs": true,
         "**/__pycache__": true
     },
-    "python.pythonPath": "/home/peter/.virtualenvs/srcomp36/bin/python"
+    "python.pythonPath": "${env:VIRTUAL_ENV}/bin/python",
 }
