@@ -5,7 +5,7 @@ import unittest
 from typing import Any, Iterable, Iterator, Mapping, Tuple
 
 from flask.testing import FlaskClient
-from freezegun import freeze_time  # type: ignore[import]
+from freezegun import freeze_time
 
 from sr.comp.http import app
 
