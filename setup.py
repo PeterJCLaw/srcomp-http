@@ -5,7 +5,7 @@ with open('README.rst') as f:
 
 setup(
     name='sr.comp.http',
-    version='1.2.0',
+    version='1.3.0',
     packages=find_namespace_packages(exclude=('tests',)),
     namespace_packages=['sr', 'sr.comp'],
     package_data={'sr.comp.http': ['logging-*.ini']},
@@ -19,7 +19,7 @@ setup(
         'python-dateutil >=2.2, <3',
         'typing-extensions >=3.7.4.2, <4',
     ],
-    python_requires='>=3.5',
+    python_requires='>=3.7',
     setup_requires=[
         'Sphinx >=1.3, <2',
     ],
@@ -34,8 +34,6 @@ setup(
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3 :: Only',
