@@ -15,6 +15,7 @@ before_install:
   - pip install 'Jinja2<3'
 install: pip install .
 script:
+  - pip install -r script/testing/requirements.txt
   - ./run-tests
   # Deliberately after running the real tests so that we can't accidentally
   # depend on it

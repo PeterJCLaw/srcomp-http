@@ -1,2 +1,1 @@
-#!/bin/sh
-exec python setup.py test $@
+script/testing/test

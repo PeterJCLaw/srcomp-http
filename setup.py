@@ -28,9 +28,6 @@ setup(
             'srcomp-update = sr.comp.http.update:main',
         ],
     },
-    tests_require=[
-        'freezegun >=0.2.8, <0.4',
-    ],
     classifiers=[
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
@@ -45,6 +42,5 @@ setup(
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: WSGI :: Application',
     ],
-    test_suite='tests',
     zip_safe=False,
 )
