@@ -61,15 +61,6 @@ this is cached within the Flask application. Updates to the state repo
 are not tracked directly, and must be signalled by running the
 ``./update`` script provided.
 
-Requirements
-------------
-
--  `SRComp <https://github.com/PeterJCLaw/srcomp>`__
--  Flask
--  python-dateutil
--  simplejson
-
-Don't forget to also check the requirements for SRComp!
 
 .. |Build Status| image:: https://travis-ci.org/PeterJCLaw/srcomp-http.png?branch=master
    :target: https://travis-ci.org/PeterJCLaw/srcomp-http
