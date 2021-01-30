@@ -49,9 +49,7 @@ Development
 **Test**:
 ``./run-tests``
 
-Developers may wish to use the `SRComp
-Dev <https://github.com/PeterJCLaw/srcomp-dev>`__ repo
-to setup a dev instance.
+Developers may wish to use the `SRComp Dev`_ repo to setup a dev instance.
 
 State Caching
 ~~~~~~~~~~~~~
@@ -67,3 +65,5 @@ are not tracked directly, and must be signalled by running the
 
 .. |Docs Status| image:: https://readthedocs.org/projects/srcomp-http/badge/?version=latest
    :target: https://srcomp-http.readthedocs.org/
+
+.. _`SRComp Dev`: https://github.com/PeterJCLaw/srcomp-dev
