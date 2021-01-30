@@ -11,5 +11,8 @@
         "**/.eggs": true,
         "**/__pycache__": true
     },
+
     "python.pythonPath": "${env:VIRTUAL_ENV}/bin/python",
+
+    "restructuredtext.confPath": "",
 }
