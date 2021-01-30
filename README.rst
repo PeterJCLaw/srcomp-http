@@ -16,9 +16,38 @@ APIs to the competition state.
 Usage
 -----
 
-Run with ``./run $COMPSTATE``.
+**Install**:
 
-Test with ``./run-tests``.
+.. code:: shell
+
+    pip install git+https://github.com/PeterJCLaw/srcomp git+https://github.com/PeterJCLaw/srcomp-http
+
+**Configuration**
+
+In deployment you should configure the app by setting the ``COMPSTATE`` key of
+the app's config to the absolute path of the compstate which the server intends
+to serve.
+
+.. code:: python
+
+    from sr.comp.http import app
+    app.config['COMPSTATE'] = '/path/to/compstate'
+
+Development
+-----------
+
+**Install**:
+
+.. code:: shell
+
+    pip install git+https://github.com/PeterJCLaw/srcomp
+    pip install -e .
+
+**Run**:
+``./run $COMPSTATE``.
+
+**Test**:
+``./run-tests``
 
 Developers may wish to use the `SRComp
 Dev <https://github.com/PeterJCLaw/srcomp-dev>`__ repo
