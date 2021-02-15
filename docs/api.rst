@@ -31,7 +31,7 @@ Escaping Formatter
     :show-inheritance:
 
 JSON Encoder
-----
+------------
 
 .. automodule:: sr.comp.http.json_encoder
     :members:
