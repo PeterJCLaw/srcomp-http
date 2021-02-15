@@ -1,1 +1,5 @@
 git+https://github.com/PeterJCLaw/srcomp.git
+
+# Don't actually care about the specific version, just needs to be fairly
+# recent. Pick the same version as srcomp uses.
+Sphinx==3.4.3
