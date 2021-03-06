@@ -9,6 +9,12 @@ with open('setup-requirements.txt') as f:
 setup(
     name='sr.comp.http',
     version='1.4.0',
+    url='https://github.com/PeterJCLaw/srcomp-http',
+    project_urls={
+        'Documentation': 'https://srcomp-http.readthedocs.org/',
+        'Code': 'https://github.com/PeterJCLaw/srcomp-http',
+        'Issue tracker': 'https://github.com/PeterJCLaw/srcomp-http/issues',
+    },
     packages=find_namespace_packages(exclude=('tests',)),
     namespace_packages=['sr', 'sr.comp'],
     package_data={'sr.comp.http': ['logging-*.ini']},
