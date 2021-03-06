@@ -8,7 +8,7 @@ with open('setup-requirements.txt') as f:
 
 setup(
     name='sr.comp.http',
-    version='1.3.0',
+    version='1.4.0',
     packages=find_namespace_packages(exclude=('tests',)),
     namespace_packages=['sr', 'sr.comp'],
     package_data={'sr.comp.http': ['logging-*.ini']},
