@@ -9,8 +9,6 @@ matrix:
 before_install:
   - pip install -U pip setuptools
   - pip install git+https://github.com/PeterJCLaw/srcomp.git
-  # Force Jinja2 to a version which supports Python 3.5
-  - pip install 'Jinja2<3'
 install: pip install .
 script:
   - pip install -r script/testing/requirements.txt
