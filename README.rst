@@ -20,7 +20,7 @@ Usage
 
 .. code:: shell
 
-    pip install git+https://github.com/PeterJCLaw/srcomp git+https://github.com/PeterJCLaw/srcomp-http
+    pip install git+https://github.com/PeterJCLaw/srcomp-http
 
 **Configuration**
 
@@ -40,7 +40,6 @@ Development
 
 .. code:: shell
 
-    pip install git+https://github.com/PeterJCLaw/srcomp
     pip install -e .
 
 **Run**:

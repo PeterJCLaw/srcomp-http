@@ -8,7 +8,6 @@ matrix:
     - python: "3.9-dev"
 before_install:
   - pip install -U pip setuptools
-  - pip install git+https://github.com/PeterJCLaw/srcomp.git
 install: pip install .
 script:
   - pip install -r script/testing/requirements.txt
