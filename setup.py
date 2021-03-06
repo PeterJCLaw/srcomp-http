@@ -18,6 +18,7 @@ setup(
     packages=find_namespace_packages(exclude=('tests',)),
     namespace_packages=['sr', 'sr.comp'],
     package_data={'sr.comp.http': ['logging-*.ini']},
+    description="HTTP API for Student Robotics Competition Software",
     long_description=long_description,
     author="Student Robotics Competition Software SIG",
     author_email="srobo-devel@googlegroups.com",
