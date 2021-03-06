@@ -20,7 +20,7 @@ Usage
 
 .. code:: shell
 
-    pip install git+https://github.com/PeterJCLaw/srcomp-http
+    pip install sr.comp.http
 
 **Configuration**
 
