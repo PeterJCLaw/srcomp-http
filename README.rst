@@ -59,8 +59,8 @@ are not tracked directly, and must be signalled by running the
 ``./update`` script provided.
 
 
-.. |Build Status| image:: https://travis-ci.org/PeterJCLaw/srcomp-http.png?branch=master
-   :target: https://travis-ci.org/PeterJCLaw/srcomp-http
+.. |Build Status| image:: https://circleci.com/gh/PeterJCLaw/srcomp-http.svg?style=svg
+   :target: https://circleci.com/gh/PeterJCLaw/srcomp-http
 
 .. |Docs Status| image:: https://readthedocs.org/projects/srcomp-http/badge/?version=latest
    :target: https://srcomp-http.readthedocs.org/
