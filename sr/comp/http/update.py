@@ -15,7 +15,7 @@ ENDC = '\033[0m'
 
 def add_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("compstate", help="Competition state git repository path")
-    rev_help = "Target revision to update to (default: {})".format(DEFAULT_REVISION)
+    rev_help = f"Target revision to update to (default: {DEFAULT_REVISION})"
     parser.add_argument(
         "revision",
         default=DEFAULT_REVISION,
@@ -36,7 +36,7 @@ def run_update(args: argparse.Namespace) -> None:
 
     # Ensure the revision exists
     if not compstate.has_commit(revision):
-        msg = "Cannot update to unknown revision '{0}'".format(revision)
+        msg = f"Cannot update to unknown revision {revision!r}"
         exit(BOLD + FAIL + msg + ENDC)
 
     with update_lock(args.compstate):

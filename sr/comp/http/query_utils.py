@@ -28,50 +28,58 @@ from sr.comp.types import (
     TLA,
 )
 
-LeagueMatchScore = TypedDict('LeagueMatchScore', {
-    'game': Mapping[TLA, GamePoints],
-    'normalised': Dict[TLA, LeaguePoints],
-    'ranking': Dict[TLA, RankedPosition],
-})
-KnockoutMatchScore = TypedDict('KnockoutMatchScore', {
-    'game': Mapping[TLA, GamePoints],
-    'league': Dict[TLA, LeaguePoints],
-    'ranking': Dict[TLA, RankedPosition],
-})
+
+class LeagueMatchScore(TypedDict):
+    game: Mapping[TLA, GamePoints]
+    normalised: Dict[TLA, LeaguePoints]
+    ranking: Dict[TLA, RankedPosition]
+
+
+class KnockoutMatchScore(TypedDict):
+    game: Mapping[TLA, GamePoints]
+    league: Dict[TLA, LeaguePoints]
+    ranking: Dict[TLA, RankedPosition]
+
+
 MatchScore = Union[LeagueMatchScore, KnockoutMatchScore]
 
-Times = TypedDict('Times', {
-    'start': str,
-    'end': str,
-})
-StagingTimes = TypedDict('StagingTimes', {
-    'opens': str,
-    'closes': str,
-    'signal_teams': str,
-    'signal_shepherds': Dict[ShepherdName, str],
-})
-MatchTimings = TypedDict('MatchTimings', {
-    'slot': Times,
-    'game': Times,
-    'staging': StagingTimes,
-})
-MatchInfo = TypedDict('MatchInfo', {
-    'num': MatchNumber,
-    'display_name': str,
-    'arena': ArenaName,
-    'teams': List[Optional[TLA]],
-    'type': str,
-    'times': MatchTimings,
-})
-ScoredMatchInfo = TypedDict('ScoredMatchInfo', {
-    'num': MatchNumber,
-    'display_name': str,
-    'arena': ArenaName,
-    'teams': List[Optional[TLA]],
-    'type': str,
-    'times': MatchTimings,
-    'scores': MatchScore,
-})
+
+class Times(TypedDict):
+    start: str
+    end: str
+
+
+class StagingTimes(TypedDict):
+    opens: str
+    closes: str
+    signal_teams: str
+    signal_shepherds: Dict[ShepherdName, str]
+
+
+class MatchTimings(TypedDict):
+    slot: Times
+    game: Times
+    staging: StagingTimes
+
+
+class MatchInfo(TypedDict):
+    num: MatchNumber
+    display_name: str
+    arena: ArenaName
+    teams: List[Optional[TLA]]
+    type: str  # noqa:A003
+    times: MatchTimings
+
+
+class ScoredMatchInfo(TypedDict):
+    num: MatchNumber
+    display_name: str
+    arena: ArenaName
+    teams: List[Optional[TLA]]
+    type: str  # noqa:A003
+    times: MatchTimings
+    scores: MatchScore
+
 
 TParseable = TypeVar('TParseable', int, str, datetime.datetime)
 

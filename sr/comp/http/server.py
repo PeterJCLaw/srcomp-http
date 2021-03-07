@@ -140,7 +140,7 @@ def team_info(comp: SRComp, team: Team) -> Dict[str, Any]:
         g.comp_man.root_dir,
         'teams',
         'images',
-        '{}.png'.format(team.tla),
+        f'{team.tla}.png',
     )):
         info['image_url'] = url_for('get_team_image', tla=team.tla)
 
@@ -182,7 +182,7 @@ def get_team_image(tla: str) -> Response:
         g.comp_man.root_dir,
         'teams',
         'images',
-        '{}.png'.format(team.tla),
+        f'{team.tla}.png',
     )
     if os.path.exists(filename):
         return send_file(filename, mimetype='image/png')
@@ -304,7 +304,7 @@ def matches() -> str:
                     if predicate(filter_type(filter_value(match)))  # type: ignore[no-untyped-call]  # noqa:E501
                 ]
             except ValueError:
-                raise errors.BadRequest("Bad value '{0}' for '{1}'.".format(value, filter_key))
+                raise errors.BadRequest(f"Bad value '{value}' for '{filter_key}'.")
 
     # limit the results
     try:

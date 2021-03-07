@@ -30,8 +30,8 @@ def exclusive_lock(lock_path: str) -> IO[str]:
 
 def share_lock(lock_path: str) -> IO[str]:
     try:
-        fd = open(lock_path, "r")
-    except IOError as ioe:
+        fd = open(lock_path)
+    except OSError as ioe:
         if ioe.errno == errno.ENOENT:
             # Touch the file so it exists
             fd = open(lock_path, "w+")
