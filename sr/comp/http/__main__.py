@@ -11,7 +11,7 @@ parser.add_argument(
     "--port",
     type=int,
     default=5112,
-    help="Port to listen on.",
+    help="Port to listen on (default: %(default)s).",
 )
 parser.add_argument(
     "--no-reloader",

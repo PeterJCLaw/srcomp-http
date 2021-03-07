@@ -7,7 +7,6 @@ import argparse
 from sr.comp.http.manager import update_lock
 from sr.comp.raw_compstate import RawCompstate
 
-DEFAULT_REVISION = 'origin/master'
 BOLD = '\033[1m'
 FAIL = '\033[91m'
 ENDC = '\033[0m'
@@ -15,12 +14,11 @@ ENDC = '\033[0m'
 
 def add_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("compstate", help="Competition state git repository path")
-    rev_help = f"Target revision to update to (default: {DEFAULT_REVISION})"
     parser.add_argument(
         "revision",
-        default=DEFAULT_REVISION,
+        default='origin/master',
         nargs='?',
-        help=rev_help,
+        help="Target revision to update to (default: %(default)s).",
     )
 
 
