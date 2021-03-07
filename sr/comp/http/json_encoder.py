@@ -29,7 +29,7 @@ class JsonEncoder(flask.json.JSONEncoder):
         if isinstance(obj, Enum):
             return obj.value
         elif isinstance(obj, Match):
-            comp = g.comp_man.get_comp()  # type: SRComp
+            comp: SRComp = g.comp_man.get_comp()
             return match_json_info(comp, obj)
         else:
             return super().default(obj)

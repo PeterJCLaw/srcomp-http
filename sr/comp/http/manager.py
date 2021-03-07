@@ -69,13 +69,13 @@ class SRCompManager:
     def __init__(self) -> None:
         self.root_dir = "./"
 
-        self.update_time = None  # type: Optional[float]
+        self.update_time: Optional[float] = None
         """The last time we updated our information."""
 
-        self._update_pls_time = None  # type: Optional[float]
+        self._update_pls_time: Optional[float] = None
         """The time the update pls file was last modified."""
 
-        self._comp = None  # type: Optional[SRComp]
+        self._comp: Optional[SRComp] = None
         """Cached SRComp instance."""
 
     def _load(self) -> None:

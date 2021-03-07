@@ -67,7 +67,7 @@ def format_arena(arena: Arena) -> Dict[str, Any]:
 
 @app.route('/arenas')
 def arenas() -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
     return jsonify(arenas={
         name: format_arena(arena)
         for name, arena in comp.arenas.items()
@@ -76,7 +76,7 @@ def arenas() -> str:
 
 @app.route('/arenas/<name>')
 def get_arena(name: str) -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
 
     if name not in comp.arenas:
         abort(404)
@@ -87,17 +87,17 @@ def get_arena(name: str) -> str:
 
 
 def format_location(location: Region) -> Dict[str, Any]:
-    data = {
+    data: Dict[str, Any] = {
         'get': url_for('get_location', name=location['name']),
         **location,
-    }  # type: Dict[str, Any]
+    }
     del data['name']
     return data
 
 
 @app.route('/locations')
 def locations() -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
 
     return jsonify(locations={
         name: format_location(location)
@@ -107,7 +107,7 @@ def locations() -> str:
 
 @app.route('/locations/<name>')
 def get_location(name: str) -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
 
     try:
         location = comp.venue.locations[RegionName(name)]
@@ -149,7 +149,7 @@ def team_info(comp: SRComp, team: Team) -> Dict[str, Any]:
 
 @app.route('/teams')
 def teams() -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
 
     resp = {}
     for team in comp.teams.values():
@@ -160,7 +160,7 @@ def teams() -> str:
 
 @app.route('/teams/<tla>')
 def get_team(tla: str) -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
 
     try:
         team = comp.teams[TLA(tla)]
@@ -171,7 +171,7 @@ def get_team(tla: str) -> str:
 
 @app.route('/teams/<tla>/image')
 def get_team_image(tla: str) -> Response:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
 
     try:
         team = comp.teams[TLA(tla)]
@@ -198,7 +198,7 @@ def format_corner(corner: Corner) -> Dict[str, Any]:
 
 @app.route("/corners")
 def corners() -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
     return jsonify(corners={
         number: format_corner(corner)
         for number, corner in comp.corners.items()
@@ -207,7 +207,7 @@ def corners() -> str:
 
 @app.route("/corners/<int:number>")
 def get_corner(number: int) -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
 
     if number not in comp.corners:
         abort(404)
@@ -219,17 +219,17 @@ def get_corner(number: int) -> str:
 
 @app.route("/state")
 def state() -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
     return jsonify(state=comp.state)
 
 
 def get_config_dict(comp: SRComp) -> Dict[str, Any]:
     LIBRARIES = ('sr.comp', 'sr.comp.http', 'sr.comp.ranker', 'league_ranker', 'flask')
 
-    working_set_by_key = (
+    working_set_by_key: Mapping[str, Distribution] = (
         # WorkingSet.by_key is not declared in the typeshed
         working_set.by_key   # type: ignore[attr-defined]
-    )  # type: Mapping[str, Distribution]
+    )
 
     return {
         'match_slots': {
@@ -247,20 +247,20 @@ def get_config_dict(comp: SRComp) -> Dict[str, Any]:
 
 @app.route("/config")
 def config() -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
     return jsonify(config=get_config_dict(comp))
 
 
 @app.route("/matches/last_scored")
 def last_scored_match() -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
     return jsonify(last_scored=comp.scores.last_scored_match)
 
 
 @app.route("/matches")
 def matches() -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
-    matches = []  # type: List[MatchInfo]
+    comp: SRComp = g.comp_man.get_comp()
+    matches: List[MatchInfo] = []
     for slots in comp.schedule.matches:
         matches.extend(
             match_json_info(comp, match)
@@ -276,7 +276,7 @@ def matches() -> str:
         else:
             return dateutil.parser.parse(string)
 
-    filters = [
+    filters: Any = [  # TODO: re-work this to get checking
         ('type', MatchType, lambda x: x['type']),
         ('arena', str, lambda x: x['arena']),
         ('num', int, lambda x: x['num']),
@@ -284,7 +284,7 @@ def matches() -> str:
         ('game_end_time', parse_date, lambda x: x['times']['game']['end']),
         ('slot_start_time', parse_date, lambda x: x['times']['slot']['start']),
         ('slot_end_time', parse_date, lambda x: x['times']['slot']['end']),
-    ]  # type: Any # TODO: re-work this to get checking
+    ]
 
     # check for unknown filters
     filter_names = [name for name, _, _ in filters] + ['limit']
@@ -328,7 +328,7 @@ def matches() -> str:
 
 @app.route("/periods")
 def match_periods() -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
 
     def match_num(period: MatchPeriod, index: int) -> MatchNumber:
         games = list(period.matches[index].values())
@@ -350,7 +350,7 @@ def match_periods() -> str:
 
 @app.route("/current")
 def current_state() -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
 
     time = datetime.datetime.now(comp.timezone)
 
@@ -390,13 +390,13 @@ def current_state() -> str:
 
 @app.route('/knockout')
 def knockout() -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
     return jsonify(rounds=comp.schedule.knockout_rounds)
 
 
 @app.route('/tiebreaker')
 def tiebreaker() -> str:
-    comp = g.comp_man.get_comp()  # type: SRComp
+    comp: SRComp = g.comp_man.get_comp()
     try:
         return jsonify(tiebreaker=comp.schedule.tiebreaker)
     except AttributeError:
