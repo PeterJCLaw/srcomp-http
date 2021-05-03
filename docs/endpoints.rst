@@ -32,7 +32,7 @@ Get an object containing all arenas.
     }
 
 The arena objects returned are in the same format as those described below. The
-keys of the ``arenas`` mapping are the ``name``s of the arenas.
+keys of the ``arenas`` mapping are the names of the arenas.
 
 /arenas/ ``name``
 -----------------
@@ -65,7 +65,7 @@ Get an object containing all teams.
     }
 
 The team objects returned are in the same format as those described below. The
-keys of the ``teams`` mapping are the ``tla``s of the teams.
+keys of the ``teams`` mapping are the TLAs of the teams.
 
 /teams/ ``tla``
 ---------------
@@ -108,7 +108,7 @@ Get an object containing all corners.
     }
 
 The corner objects returned are in the same format as those described below. The
-keys of the ``corners`` mapping are the ``number``s of the corners.
+keys of the ``corners`` mapping are the numbers of the corners.
 
 /corners/ ``number``
 --------------------
