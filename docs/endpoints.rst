@@ -82,8 +82,8 @@ Get information about a team.
           "name": "..."
         },
         "scores": {
-            "league": "...",
-            "knockout": "..."
+            "game": "...",
+            "league": "..."
         }
     }
 
@@ -151,9 +151,9 @@ close values of their staging times. They are presented in the same format
 as the `/matches`_ endpoint uses.
 
 The ``shepherding_matches`` key is a list of the matches which are currently
-being staged, as measured by the current time falling between the earliest
-shepherding signal value and time when staging closes. They are presented
-in the same format as the `/matches`_ endpoint uses.
+being shepherded for, as measured by the current time falling between the
+earliest shepherding signal value and time when staging closes. They are
+presented in the same format as the `/matches`_ endpoint uses.
 
 The ``time`` key is the current time on the server.
 
@@ -207,16 +207,12 @@ Get information about a named location within the venue.
 .. code-block:: json
 
     {
-        "locations": {
-            "..." : {
-                "display_name": "...",
-                "get": "...",
-                "teams": [ "..." ],
-                "shepherds": {
-                    "name": "...",
-                    "colour": "..."
-                }
-            }
+        "display_name": "...",
+        "get": "...",
+        "teams": [ "..." ],
+        "shepherds": {
+            "name": "...",
+            "colour": "..."
         }
     }
 
@@ -304,8 +300,6 @@ limits start from the last match and work backwards.
                         "start": "..."
                     },
                     "staging": {
-                        "end": "...",
-                        "start": "...",
                         "opens": "...",
                         "closes": "...",
                         "signal_teams": "...",
@@ -329,9 +323,9 @@ league matches while ``normalised`` will be present for knockout matches.
 Notably, teams which are disqualified or no-show from a match will have a
 normalised (league) score of zero but will still have a position value.
 
-The staging deadline is available in ``times.staging.end`` while the
-``times.staging.start`` value is when shepherds should start looking for teams
-although this isn't a strict value.
+The staging deadline is available in ``times.staging.closes`` while the
+``times.staging.signal_shepherds`` value is when shepherds should start looking
+for teams although this isn't a strict value.
 
 /matches/last_scored
 --------------------
