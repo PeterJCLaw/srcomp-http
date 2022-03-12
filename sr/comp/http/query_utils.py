@@ -10,15 +10,7 @@ from league_ranker import LeaguePoints, RankedPosition
 
 from sr.comp.comp import SRComp
 from sr.comp.match_period import Match, MatchType
-from sr.comp.scores import BaseScores, degroup, Scores
-from sr.comp.types import (
-    ArenaName,
-    GamePoints,
-    MatchId,
-    MatchNumber,
-    ShepherdName,
-    TLA,
-)
+from sr.comp.types import ArenaName, GamePoints, MatchNumber, ShepherdName, TLA
 
 
 class LeagueMatchScore(TypedDict):
@@ -33,7 +25,7 @@ class KnockoutMatchScore(TypedDict):
     ranking: Mapping[TLA, RankedPosition]
 
 
-MatchScore = Union[LeagueMatchScore, KnockoutMatchScore]
+MatchScoreDict = Union[LeagueMatchScore, KnockoutMatchScore]
 
 
 class Times(TypedDict):
@@ -64,67 +56,10 @@ class _MatchInfo(TypedDict):
 
 
 class MatchInfo(_MatchInfo, total=False):
-    scores: MatchScore
+    scores: MatchScoreDict
 
 
 TParseable = TypeVar('TParseable', int, str, datetime.datetime)
-
-
-def get_scores(scores: Scores, match: Match) -> MatchScore | None:
-    """
-    Get a scores object suitable for JSON output.
-
-    Parameters
-    ----------
-    scores : sr.comp.scores.Scores
-        The competition scores.
-    match : sr.comp.match_period.Match
-        A match.
-
-    Returns
-    -------
-    dict
-        A dictionary suitable for JSON output.
-    """
-    k = (match.arena, match.num)
-
-    def get_scores_info(match: Match) -> Union[
-        tuple[BaseScores, Callable[[MatchId], dict[TLA, RankedPosition]]],
-        tuple[None, None],
-    ]:
-        if match.type == MatchType.knockout:
-            scores_info = scores.knockout
-            if match.use_resolved_ranking:
-                return scores_info, scores_info.resolved_positions.__getitem__
-            # Just the Finals
-            return scores_info, lambda k: degroup(scores_info.game_positions[k])
-
-        elif match.type == MatchType.tiebreaker:
-            scores_info = scores.tiebreaker
-            return scores_info, \
-                lambda k: degroup(scores_info.game_positions[k])
-
-        else:
-            return None, None
-
-    scores_info, ranking = get_scores_info(match)
-    if scores_info and ranking and k in scores_info.game_points:
-        return {
-            'game': scores_info.game_points[k],
-            'normalised': scores_info.ranked_points[k],
-            'ranking': ranking(k),
-        }
-
-    # TODO: consider using 'normalised' for both, instead of 'league' below
-    league = scores.league
-    if k in league.game_points:
-        return {
-            'game': league.game_points[k],
-            'league': league.ranked_points[k],
-            'ranking': degroup(league.game_positions[k]),
-        }
-
-    return None
 
 
 def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
@@ -180,9 +115,21 @@ def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
         },
     })
 
-    score_info = get_scores(comp.scores, match)
+    score_info = comp.scores.get_scores(match)
     if score_info:
-        info['scores'] = score_info
+        # TODO: consider using 'normalised' for both, instead of 'league' below
+        if match.type == MatchType.league:
+            info['scores'] = {
+                'game': score_info.game,
+                'league': score_info.normalised,
+                'ranking': score_info.ranking,
+            }
+        else:
+            info['scores'] = {
+                'game': score_info.game,
+                'normalised': score_info.normalised,
+                'ranking': score_info.ranking,
+            }
 
     return info
 

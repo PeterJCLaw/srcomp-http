@@ -20,7 +20,7 @@ setup(
     author="Student Robotics Competition Software SIG",
     author_email="srobo-devel@googlegroups.com",
     install_requires=[
-        'sr.comp >=1.2, <2',
+        'sr.comp >=1.5, <2',
         'Flask >=1, <3',
         'Werkzeug >= 2, <3',
         'simplejson >=3.6, <4',
