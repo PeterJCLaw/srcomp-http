@@ -22,7 +22,7 @@ class JsonEncoder(simplejson.JSONEncoder):
         # with the 'default' method if we require. It's a bit hacky, but it
         # works.
         # In an ideal world, the types we deal with in 'default' would have
-        # approriate '_asdict' methods.
+        # appropriate '_asdict' methods.
         kwargs['namedtuple_as_object'] = False
         kwargs['tuple_as_array'] = False
         super().__init__(*args, **kwargs)
