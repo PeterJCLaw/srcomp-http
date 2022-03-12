@@ -1,10 +1,3 @@
 # Don't actually care about the specific version, just needs to be fairly
 # recent. Pick the same version as srcomp uses.
 Sphinx==3.4.3
-
-# Werkzeug 2 changes the semantics of access through its LocalProxy objects,
-# such that Flask ends up throwing an error due to access through `g` outside of
-# a request scope. There's probably a way to convince autodoc to ignore
-# `flask.g`, but it's simpler for now to just pin to Werkzeug < 2 (especially as
-# Werkzeug 2 isn't actually released yet).
-Werkzeug<2
