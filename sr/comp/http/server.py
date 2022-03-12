@@ -42,7 +42,7 @@ def after_request(resp: Response) -> Response:
 
 
 @app.route('/')
-def root() -> str:
+def root() -> Response:
     return jsonify(
         arenas=url_for('arenas'),
         teams=url_for('teams'),
@@ -66,7 +66,7 @@ def format_arena(arena: Arena) -> Dict[str, Any]:
 
 
 @app.route('/arenas')
-def arenas() -> str:
+def arenas() -> Response:
     comp: SRComp = g.comp_man.get_comp()
     return jsonify(arenas={
         name: format_arena(arena)
@@ -75,7 +75,7 @@ def arenas() -> str:
 
 
 @app.route('/arenas/<name>')
-def get_arena(name: str) -> str:
+def get_arena(name: str) -> Response:
     comp: SRComp = g.comp_man.get_comp()
 
     if name not in comp.arenas:
@@ -96,7 +96,7 @@ def format_location(location: Region) -> Dict[str, Any]:
 
 
 @app.route('/locations')
-def locations() -> str:
+def locations() -> Response:
     comp: SRComp = g.comp_man.get_comp()
 
     return jsonify(locations={
@@ -106,7 +106,7 @@ def locations() -> str:
 
 
 @app.route('/locations/<name>')
-def get_location(name: str) -> str:
+def get_location(name: str) -> Response:
     comp: SRComp = g.comp_man.get_comp()
 
     try:
@@ -148,7 +148,7 @@ def team_info(comp: SRComp, team: Team) -> Dict[str, Any]:
 
 
 @app.route('/teams')
-def teams() -> str:
+def teams() -> Response:
     comp: SRComp = g.comp_man.get_comp()
 
     resp = {}
@@ -159,7 +159,7 @@ def teams() -> str:
 
 
 @app.route('/teams/<tla>')
-def get_team(tla: str) -> str:
+def get_team(tla: str) -> Response:
     comp: SRComp = g.comp_man.get_comp()
 
     try:
@@ -197,7 +197,7 @@ def format_corner(corner: Corner) -> Dict[str, Any]:
 
 
 @app.route("/corners")
-def corners() -> str:
+def corners() -> Response:
     comp: SRComp = g.comp_man.get_comp()
     return jsonify(corners={
         number: format_corner(corner)
@@ -206,7 +206,7 @@ def corners() -> str:
 
 
 @app.route("/corners/<int:number>")
-def get_corner(number: int) -> str:
+def get_corner(number: int) -> Response:
     comp: SRComp = g.comp_man.get_comp()
 
     if number not in comp.corners:
@@ -218,7 +218,7 @@ def get_corner(number: int) -> str:
 
 
 @app.route("/state")
-def state() -> str:
+def state() -> Response:
     comp: SRComp = g.comp_man.get_comp()
     return jsonify(state=comp.state)
 
@@ -246,19 +246,19 @@ def get_config_dict(comp: SRComp) -> Dict[str, Any]:
 
 
 @app.route("/config")
-def config() -> str:
+def config() -> Response:
     comp: SRComp = g.comp_man.get_comp()
     return jsonify(config=get_config_dict(comp))
 
 
 @app.route("/matches/last_scored")
-def last_scored_match() -> str:
+def last_scored_match() -> Response:
     comp: SRComp = g.comp_man.get_comp()
     return jsonify(last_scored=comp.scores.last_scored_match)
 
 
 @app.route("/matches")
-def matches() -> str:
+def matches() -> Response:
     comp: SRComp = g.comp_man.get_comp()
     matches: List[MatchInfo] = []
     for slots in comp.schedule.matches:
@@ -327,7 +327,7 @@ def matches() -> str:
 
 
 @app.route("/periods")
-def match_periods() -> str:
+def match_periods() -> Response:
     comp: SRComp = g.comp_man.get_comp()
 
     def match_num(period: MatchPeriod, index: int) -> MatchNumber:
@@ -349,7 +349,7 @@ def match_periods() -> str:
 
 
 @app.route("/current")
-def current_state() -> str:
+def current_state() -> Response:
     comp: SRComp = g.comp_man.get_comp()
 
     time = datetime.datetime.now(comp.timezone)
@@ -389,13 +389,13 @@ def current_state() -> str:
 
 
 @app.route('/knockout')
-def knockout() -> str:
+def knockout() -> Response:
     comp: SRComp = g.comp_man.get_comp()
     return jsonify(rounds=comp.schedule.knockout_rounds)
 
 
 @app.route('/tiebreaker')
-def tiebreaker() -> str:
+def tiebreaker() -> Response:
     comp: SRComp = g.comp_man.get_comp()
     try:
         return jsonify(tiebreaker=comp.schedule.tiebreaker)
@@ -408,7 +408,7 @@ def error_handler(
     e: werkzeug.exceptions.HTTPException,
 ) -> Union[
     werkzeug.exceptions.HTTPException,
-    Tuple[str, int],
+    Tuple[Response, int],
 ]:
     if e.code is None or e.code < 400:
         return e
