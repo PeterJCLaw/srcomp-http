@@ -2,5 +2,6 @@
 mypy>=0.940
 
 types-freezegun
+types-python-dateutil
 types-setuptools
 types-simplejson
