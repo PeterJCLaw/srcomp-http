@@ -31,13 +31,13 @@ from sr.comp.types import (
 
 class LeagueMatchScore(TypedDict):
     game: Mapping[TLA, GamePoints]
-    normalised: Dict[TLA, LeaguePoints]
+    league: Dict[TLA, LeaguePoints]
     ranking: Dict[TLA, RankedPosition]
 
 
 class KnockoutMatchScore(TypedDict):
     game: Mapping[TLA, GamePoints]
-    league: Dict[TLA, LeaguePoints]
+    normalised: Dict[TLA, LeaguePoints]
     ranking: Dict[TLA, RankedPosition]
 
 
