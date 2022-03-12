@@ -88,6 +88,8 @@ class ApiError(Exception):
 
 class ApiTests(unittest.TestCase):
     def server_get(self, endpoint: str) -> Any:
+        # TODO: move to using Werkzeug's TestResponse class once we drop
+        # Flask/Werkzeug<2.
         response, status, header = self.client.get(endpoint)
         json_response = json.loads(b''.join(response).decode('UTF-8'))
         code = int(status.split(' ')[0])

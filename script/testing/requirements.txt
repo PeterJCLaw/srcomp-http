@@ -1,1 +1,6 @@
 freezegun >=1, <2
+
+# Werkzeug test client has deprecated treating responses as tuples. Since we
+# want to support both Flask 1 & 2 (and thus Werkzeug 1 & 2) for a while, limit
+# the latter to versions which support tuple spelling.
+Werkzeug<2.1
