@@ -113,7 +113,7 @@ class ApiTests(unittest.TestCase):
 
     def setUp(self) -> None:
         super().setUp()
-        self.client: FlaskClient[FlaskTestResponse] = FlaskClient(app)
+        self.client = FlaskClient(app)
 
     def test_endpoints(self) -> None:
         endpoints = [
