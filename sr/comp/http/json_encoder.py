@@ -1,17 +1,19 @@
 """JSON formatting routines."""
 
+import datetime
 from enum import Enum
 from typing import Any
 
-import flask.json
+import simplejson
 from flask import g
+from werkzeug.http import http_date
 
 from sr.comp.comp import SRComp
 from sr.comp.http.query_utils import match_json_info
 from sr.comp.match_period import Match
 
 
-class JsonEncoder(flask.json.JSONEncoder):
+class JsonEncoder(simplejson.JSONEncoder):
     """A JSON encoder that deals with various types used in SRComp."""
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
@@ -31,5 +33,9 @@ class JsonEncoder(flask.json.JSONEncoder):
         elif isinstance(obj, Match):
             comp: SRComp = g.comp_man.get_comp()
             return match_json_info(comp, obj)
+        elif isinstance(obj, datetime.datetime):
+            return http_date(obj.utctimetuple())
+        elif isinstance(obj, datetime.date):
+            return http_date(obj.timetuple())
         else:
             return super().default(obj)

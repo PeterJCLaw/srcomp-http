@@ -22,7 +22,7 @@ from sr.comp.types import ArenaName, MatchNumber, Region, RegionName, TLA
 from .query_utils import MatchInfo
 
 app = Flask('sr.comp.http')
-app.json_encoder = JsonEncoder
+app.json_encoder = JsonEncoder  # type: ignore[assignment]
 
 comp_man = SRCompManager()
 
