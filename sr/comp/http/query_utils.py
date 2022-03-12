@@ -62,7 +62,7 @@ class MatchTimings(TypedDict):
     staging: StagingTimes
 
 
-class MatchInfo(TypedDict):
+class _MatchInfo(TypedDict):
     num: MatchNumber
     display_name: str
     arena: ArenaName
@@ -71,13 +71,7 @@ class MatchInfo(TypedDict):
     times: MatchTimings
 
 
-class ScoredMatchInfo(TypedDict):
-    num: MatchNumber
-    display_name: str
-    arena: ArenaName
-    teams: List[Optional[TLA]]
-    type: str  # noqa:A003
-    times: MatchTimings
+class MatchInfo(_MatchInfo, total=False):
     scores: MatchScore
 
 
@@ -141,7 +135,7 @@ def get_scores(scores: Scores, match: Match) -> Optional[MatchScore]:
     return None
 
 
-def match_json_info(comp: SRComp, match: Match) -> Union[MatchInfo, ScoredMatchInfo]:
+def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
     """
     Get match JSON information.
 
@@ -196,18 +190,7 @@ def match_json_info(comp: SRComp, match: Match) -> Union[MatchInfo, ScoredMatchI
 
     score_info = get_scores(comp.scores, match)
     if score_info:
-        # TODO: once we're on Python 3.6+ we should be able to move to
-        # class-based TypedDicts and thus make use of the totality flag, rather
-        # than do this duplication.
-        return ScoredMatchInfo({
-            'scores': score_info,
-            'num': info['num'],
-            'display_name': info['display_name'],
-            'arena': info['arena'],
-            'teams': info['teams'],
-            'type': info['type'],
-            'times': info['times'],
-        })
+        info['scores'] = score_info
 
     return info
 
