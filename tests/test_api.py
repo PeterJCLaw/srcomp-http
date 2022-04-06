@@ -1,5 +1,4 @@
 import contextlib
-import json
 import os.path
 import unittest
 from typing import Any, Iterable, Iterator, Mapping, Tuple
@@ -88,11 +87,11 @@ class ApiError(Exception):
 
 class ApiTests(unittest.TestCase):
     def server_get(self, endpoint: str) -> Any:
-        # TODO: move to using Werkzeug's TestResponse class once we drop
-        # Flask/Werkzeug<2.
-        response, status, header = self.client.get(endpoint)
-        json_response = json.loads(b''.join(response).decode('UTF-8'))
-        code = int(status.split(' ')[0])
+        response = self.client.get(endpoint)
+        json_response = response.json
+        code = int(response.status.split(' ')[0])
+
+        assert json_response is not None, "No json data"  # placate mypy
 
         if 200 <= code <= 299:
             return json_response
@@ -149,14 +148,18 @@ class ApiTests(unittest.TestCase):
                 self.server_get(e)
 
     def test_parent(self) -> None:
-        response, code, header = self.client.get('')
+        response = self.client.get('')
 
-        code_prefix = code[:4]
+        code_prefix = response.status[:4]
         self.assertIn(code_prefix, ('308 ', '301 '), "Should indicate a redirect")
 
-        self.assertIn('Location', header, "Should have indicated where to redirect to")
+        self.assertIn(
+            'Location',
+            response.headers,
+            "Should have indicated where to redirect to",
+        )
 
-        self.assertEqual('http://localhost/', header['Location'])
+        self.assertEqual('http://localhost/', response.headers['Location'])
 
     def test_root(self) -> None:
         expected = {

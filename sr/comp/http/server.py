@@ -6,8 +6,8 @@ import dateutil.parser
 import dateutil.tz
 import werkzeug.exceptions
 from flask import abort, Flask, g, jsonify, request, send_file, url_for
-from flask.wrappers import Response
 from pkg_resources import Distribution, working_set
+from werkzeug import Response
 
 from sr.comp.arenas import Arena, Corner, CornerNumber
 from sr.comp.comp import SRComp
