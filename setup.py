@@ -3,9 +3,6 @@ from setuptools import find_namespace_packages, setup
 with open('README.rst') as f:
     long_description = f.read()
 
-with open('setup-requirements.txt') as f:
-    setup_requires = f.readlines()
-
 setup(
     name='sr.comp.http',
     version='1.4.3',
@@ -31,7 +28,6 @@ setup(
         'typing-extensions >=3.7.4.2, <5',
     ],
     python_requires='>=3.7',
-    setup_requires=setup_requires,
     entry_points={
         'console_scripts': [
             'srcomp-update = sr.comp.http.update:main',

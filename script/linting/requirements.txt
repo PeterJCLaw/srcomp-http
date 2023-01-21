@@ -1,6 +1,4 @@
-# Need 3.8 so that we can have pyflakes > 2.2 which has fixes for various type comment issues
-flake8 >= 3.8
-
+flake8>=5
 flake8-builtins
 flake8-bugbear
 flake8-commas
