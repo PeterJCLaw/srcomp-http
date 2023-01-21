@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import datetime
 import os.path
-from typing import Any, Dict, List, Mapping, Tuple, Union
+from typing import Any, Mapping, Union
 
 import dateutil.parser
 import dateutil.tz
@@ -57,7 +59,7 @@ def root() -> Response:
     )
 
 
-def format_arena(arena: Arena) -> Dict[str, Any]:
+def format_arena(arena: Arena) -> dict[str, Any]:
     data = {'get': url_for('get_arena', name=arena.name)}
     data.update(arena._asdict())
     if not arena.colour:
@@ -86,8 +88,8 @@ def get_arena(name: str) -> Response:
     return jsonify(**format_arena(comp.arenas[arena_name]))
 
 
-def format_location(location: Region) -> Dict[str, Any]:
-    data: Dict[str, Any] = {
+def format_location(location: Region) -> dict[str, Any]:
+    data: dict[str, Any] = {
         'get': url_for('get_location', name=location['name']),
         **location,
     }
@@ -117,7 +119,7 @@ def get_location(name: str) -> Response:
     return jsonify(format_location(location))
 
 
-def team_info(comp: SRComp, team: Team) -> Dict[str, Any]:
+def team_info(comp: SRComp, team: Team) -> dict[str, Any]:
     scores = comp.scores.league.teams[team.tla]
     league_pos = comp.scores.league.positions[team.tla]
     location = comp.venue.get_team_location(team.tla)
@@ -190,7 +192,7 @@ def get_team_image(tla: str) -> Response:
         abort(404)
 
 
-def format_corner(corner: Corner) -> Dict[str, Any]:
+def format_corner(corner: Corner) -> dict[str, Any]:
     data = {'get': url_for('get_corner', number=corner.number)}
     data.update(corner._asdict())
     return data
@@ -223,7 +225,7 @@ def state() -> Response:
     return jsonify(state=comp.state)
 
 
-def get_config_dict(comp: SRComp) -> Dict[str, Any]:
+def get_config_dict(comp: SRComp) -> dict[str, Any]:
     LIBRARIES = ('sr.comp', 'sr.comp.http', 'sr.comp.ranker', 'league_ranker', 'flask')
 
     working_set_by_key: Mapping[str, Distribution] = (
@@ -260,7 +262,7 @@ def last_scored_match() -> Response:
 @app.route("/matches")
 def matches() -> Response:
     comp: SRComp = g.comp_man.get_comp()
-    matches: List[MatchInfo] = []
+    matches: list[MatchInfo] = []
     for slots in comp.schedule.matches:
         matches.extend(
             match_json_info(comp, match)
@@ -408,7 +410,7 @@ def error_handler(
     e: werkzeug.exceptions.HTTPException,
 ) -> Union[
     werkzeug.exceptions.HTTPException,
-    Tuple[Response, int],
+    tuple[Response, int],
 ]:
     if e.code is None or e.code < 400:
         return e

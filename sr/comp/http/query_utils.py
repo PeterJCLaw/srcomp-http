@@ -1,17 +1,9 @@
 """Various utils for working with HTTP."""
 
+from __future__ import annotations
+
 import datetime
-from typing import (
-    Callable,
-    Dict,
-    List,
-    Mapping,
-    Optional,
-    overload,
-    Tuple,
-    TypeVar,
-    Union,
-)
+from typing import Callable, Mapping, overload, TypeVar, Union
 from typing_extensions import TypedDict
 
 from league_ranker import LeaguePoints, RankedPosition
@@ -53,7 +45,7 @@ class StagingTimes(TypedDict):
     opens: str
     closes: str
     signal_teams: str
-    signal_shepherds: Dict[ShepherdName, str]
+    signal_shepherds: dict[ShepherdName, str]
 
 
 class MatchTimings(TypedDict):
@@ -66,7 +58,7 @@ class _MatchInfo(TypedDict):
     num: MatchNumber
     display_name: str
     arena: ArenaName
-    teams: List[Optional[TLA]]
+    teams: list[TLA | None]
     type: str  # noqa:A003
     times: MatchTimings
 
@@ -78,7 +70,7 @@ class MatchInfo(_MatchInfo, total=False):
 TParseable = TypeVar('TParseable', int, str, datetime.datetime)
 
 
-def get_scores(scores: Scores, match: Match) -> Optional[MatchScore]:
+def get_scores(scores: Scores, match: Match) -> MatchScore | None:
     """
     Get a scores object suitable for JSON output.
 
@@ -97,8 +89,8 @@ def get_scores(scores: Scores, match: Match) -> Optional[MatchScore]:
     k = (match.arena, match.num)
 
     def get_scores_info(match: Match) -> Union[
-        Tuple[BaseScores, Callable[[MatchId], Dict[TLA, RankedPosition]]],
-        Tuple[None, None],
+        tuple[BaseScores, Callable[[MatchId], dict[TLA, RankedPosition]]],
+        tuple[None, None],
     ]:
         if match.type == MatchType.knockout:
             scores_info = scores.knockout

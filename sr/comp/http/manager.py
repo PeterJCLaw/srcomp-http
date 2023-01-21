@@ -1,12 +1,14 @@
 """Routines for managing a Compstate instance."""
 
+from __future__ import annotations
+
 import contextlib
 import errno
 import fcntl
 import logging
 import os
 import time
-from typing import IO, Iterator, Optional
+from typing import IO, Iterator
 
 from sr.comp.comp import SRComp
 
@@ -69,13 +71,13 @@ class SRCompManager:
     def __init__(self) -> None:
         self.root_dir = "./"
 
-        self.update_time: Optional[float] = None
+        self.update_time: float | None = None
         """The last time we updated our information."""
 
-        self._update_pls_time: Optional[float] = None
+        self._update_pls_time: float | None = None
         """The time the update pls file was last modified."""
 
-        self._comp: Optional[SRComp] = None
+        self._comp: SRComp | None = None
         """Cached SRComp instance."""
 
     def _load(self) -> None:
