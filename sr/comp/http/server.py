@@ -94,6 +94,8 @@ def format_location(location: Region) -> dict[str, Any]:
         **location,
     }
     del data['name']
+    if not data['description']:
+        del data['description']
     return data
 
 
