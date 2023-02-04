@@ -86,6 +86,8 @@ class ApiError(Exception):
 
 
 class ApiTests(unittest.TestCase):
+    maxDiff = 8000
+
     def server_get(self, endpoint: str) -> Any:
         response = self.client.get(endpoint)
         json_response = response.json
