@@ -21,7 +21,10 @@ setup(
     author_email="srobo-devel@googlegroups.com",
     install_requires=[
         'sr.comp >=1.2, <2',
-        'Flask >=1, <3',
+        # `Flask.json_encoder` is removed in 2.3. Unfortunately its replacement
+        # was only added in 2.2 (!), so supporting wider versions is tricky.
+        # Limit what we support for now.
+        'Flask >=1, <2.3',
         'Werkzeug >= 2, <3',
         'simplejson >=3.6, <4',
         'python-dateutil >=2.2, <3',
