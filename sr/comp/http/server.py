@@ -22,6 +22,7 @@ from sr.comp.teams import Team
 from sr.comp.types import ArenaName, MatchNumber, Region, RegionName, TLA
 
 from .query_utils import MatchInfo
+from .structs import NameWithURL, TeamInfo, TeamScores
 
 app = Flask('sr.comp.http')
 app.json_encoder = JsonEncoder  # type: ignore[assignment]
@@ -121,24 +122,24 @@ def get_location(name: str) -> Response:
     return jsonify(format_location(location))
 
 
-def team_info(comp: SRComp, team: Team) -> dict[str, Any]:
+def team_info(comp: SRComp, team: Team) -> TeamInfo:
     scores = comp.scores.league.teams[team.tla]
     league_pos = comp.scores.league.positions[team.tla]
     location = comp.venue.get_team_location(team.tla)
-    info = {
-        'name': team.name,
-        'get': url_for('get_team', tla=team.tla),
-        'tla': team.tla,
-        'league_pos': league_pos,
-        'location': {
-            'name': location,
-            'get': url_for('get_location', name=location),
-        },
-        'scores': {
-            'league': scores.league_points,
-            'game': scores.game_points,
-        },
-    }
+    info = TeamInfo(
+        name=team.name,
+        get=url_for('get_team', tla=team.tla),
+        tla=team.tla,
+        league_pos=league_pos,
+        location=NameWithURL(
+            name=location,
+            get=url_for('get_location', name=location),
+        ),
+        scores=TeamScores(
+            league=scores.league_points,
+            game=scores.game_points,
+        ),
+    )
 
     if os.path.exists(os.path.join(
         g.comp_man.root_dir,

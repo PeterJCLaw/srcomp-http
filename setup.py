@@ -28,7 +28,7 @@ setup(
         'Werkzeug >= 2, <3',
         'simplejson >=3.6, <4',
         'python-dateutil >=2.2, <3',
-        'typing-extensions >=3.7.4.2, <5',
+        'typing-extensions >=4, <5',
     ],
     python_requires='>=3.7',
     entry_points={
