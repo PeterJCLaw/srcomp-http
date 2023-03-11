@@ -83,6 +83,7 @@ Get information about a team.
           "get": "...",
           "name": "..."
         },
+        "rookie": "...",
         "scores": {
             "game": "...",
             "league": "..."

@@ -297,6 +297,7 @@ class ApiTests(unittest.TestCase):
                 'get': '/locations/a-group',
                 'name': 'a-group',
             },
+            'rookie': False,
             'scores': {
                 'league': 68,
                 'game': 69,
