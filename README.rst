@@ -36,6 +36,12 @@ to serve.
 Development
 -----------
 
+**Clone**:
+
+For tests to work, you will need to clone the `tests/dummy` submodule too:
+
+``git submodule update --init``
+
 **Install**:
 
 .. code:: shell
