@@ -134,6 +134,7 @@ def team_info(comp: SRComp, team: Team) -> dict[str, Any]:
             'name': location,
             'get': url_for('get_location', name=location),
         },
+        'rookie': team.rookie,
         'scores': {
             'league': scores.league_points,
             'game': scores.game_points,
