@@ -20,7 +20,7 @@ setup(
     author="Student Robotics Competition Software SIG",
     author_email="srobo-devel@googlegroups.com",
     install_requires=[
-        'sr.comp >=1.2, <2',
+        'sr.comp >=1.5, <2',
         # `Flask.json_encoder` is removed in 2.3. Unfortunately its replacement
         # was only added in 2.2 (!), so supporting wider versions is tricky.
         # Limit what we support for now.
