@@ -15,7 +15,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 project = 'sr.comp.http'
-copyright = '2015, Student Robotics'
+copyright = "2015-2023, SRComp contributors"
 
 html_theme = 'alabaster'
 
