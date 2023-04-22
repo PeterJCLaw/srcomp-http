@@ -261,36 +261,36 @@ limits start from the last match and work backwards.
 .. code-block:: json
 
     {
-        "last_scored": ...,
+        "last_scored": "...",
         "matches": [
             {
                 "arena": "...",
                 "display_name": "Match ...",
-                "num": ...,
+                "num": "...",
                 "scores": {
                     "game": {
-                        "...": ...,
-                        "...": ...,
-                        "...": ...,
-                        "...": ...
+                        "...": "...",
+                        "...": "...",
+                        "...": "...",
+                        "...": "..."
                     },
                     "league": {
-                        "...": ...,
-                        "...": ...,
-                        "...": ...,
-                        "...": ...
+                        "...": "...",
+                        "...": "...",
+                        "...": "...",
+                        "...": "..."
                     },
                     "normalised": {
-                        "...": ...,
-                        "...": ...,
-                        "...": ...,
-                        "...": ...
+                        "...": "...",
+                        "...": "...",
+                        "...": "...",
+                        "...": "..."
                     },
                     "ranking": {
-                        "...": ...,
-                        "...": ...,
-                        "...": ...,
-                        "...": ...
+                        "...": "...",
+                        "...": "...",
+                        "...": "...",
+                        "...": "..."
                     }
                 },
                 "teams": [
@@ -339,7 +339,7 @@ for teams although this isn't a strict value.
 .. code-block:: json
 
     {
-        "last_scored": ...
+        "last_scored": "..."
     }
 
 ``last_scored`` contains the highest match number which has a score assigned,
@@ -391,5 +391,5 @@ is expressed in the same format as the `/matches`_ endpoint.
 .. code-block:: json
 
     {
-        "tiebreaker": ...
+        "tiebreaker": "..."
     }
