@@ -10,13 +10,13 @@ User Guide
    introduction
    endpoints
 
-API Reference
--------------
+Internals
+---------
 
 .. toctree::
    :maxdepth: 2
 
-   api
+   internals
 
 Indices and tables
 ==================

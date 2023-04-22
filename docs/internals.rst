@@ -1,5 +1,5 @@
-API
-===
+Internal Python API
+===================
 
 .. automodule:: sr.comp.http
     :members:
