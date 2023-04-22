@@ -19,10 +19,3 @@ SRComp HTTP does not have a Python API as such, however its `shared internals
    :hidden:
 
    internals
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
