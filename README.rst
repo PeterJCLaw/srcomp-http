@@ -4,12 +4,12 @@ SR Comp HTTP
 |Build Status| |Docs Status|
 
 A HTTP interface around `SRComp <https://github.com/PeterJCLaw/srcomp/wiki/SRComp>`__,
-the fifth round of `Student Robotics <http://srobo.org>`__ competition
+the fifth round of `Student Robotics <https://studentrobotics.org>`__ competition
 software.
 
 This repository provides a JSON API to accessing information about the
 state of the competition. It is a lightweight
-`Flask <http://flask.pocoo.org/>`__ application wrapping the
+`Flask <https://palletsprojects.com/p/flask/>`__ application wrapping the
 `SRComp <https://github.com/PeterJCLaw/srcomp>`__ python
 APIs to the competition state.
 
