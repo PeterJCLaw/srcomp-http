@@ -1,7 +1,7 @@
 API
 ===
 
-.. automodule:: sr.comp
+.. automodule:: sr.comp.http
     :members:
     :undoc-members:
     :show-inheritance:
