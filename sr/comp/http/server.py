@@ -275,7 +275,7 @@ def matches() -> Response:
     def parse_date(string: str) -> datetime.datetime:
         if ' ' in string:
             raise errors.BadRequest(
-                'Date string should not contain spaces. '
+                "Date string should not contain spaces. "
                 "Did you pass in a '+'?",
             )
         else:
