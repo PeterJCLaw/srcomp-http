@@ -441,6 +441,43 @@ class ApiTests(unittest.TestCase):
             self.server_get('/matches?arena=A&limit=-1'),
         )
 
+    def test_match_filter_naive_datetime(self) -> None:
+        expected = {
+            'matches': [
+                {
+                    'display_name': 'Final (#129)',
+                    'type': 'knockout',
+                    'num': 129,
+                    'arena': 'A',
+                    'times': {
+                        'game': {
+                            'end': '2014-04-27T17:29:30+01:00',
+                            'start': '2014-04-27T17:26:30+01:00',
+                        },
+                        'slot': {
+                            'end': '2014-04-27T17:30:00+01:00',
+                            'start': '2014-04-27T17:25:00+01:00',
+                        },
+                        'staging': {
+                            'opens': '2014-04-27T17:21:30+01:00',
+                            'closes': '2014-04-27T17:24:30+01:00',
+                            'signal_teams': '2014-04-27T17:22:30+01:00',
+                            'signal_shepherds': {
+                                'Blue': '2014-04-27T17:22:29+01:00',
+                                'Green': '2014-04-27T17:23:29+01:00',
+                            },
+                        },
+                    },
+                    'teams': ['???', '???', '???', '???'],
+                },
+            ],
+            'last_scored': 99,
+        }
+        self.assertEqual(
+            expected,
+            self.server_get('/matches?arena=A&limit=-1'),
+        )
+
     def test_invalid_match_filter(self) -> None:
         with self.assertRaisesApiError('UnknownMatchFilter', 400):
             self.server_get('/matches?number=0&arena=A')
@@ -448,6 +485,55 @@ class ApiTests(unittest.TestCase):
     def test_invalid_match_filter_value(self) -> None:
         with self.assertRaisesApiError('BadRequest', 400):
             self.server_get('/matches?num=&arena=A')
+
+    def test_match_filter_time(self) -> None:
+        expected = {
+            'matches': [
+                {
+                    'display_name': 'Final (#129)',
+                    'type': 'knockout',
+                    'num': 129,
+                    'arena': 'A',
+                    'times': {
+                        'game': {
+                            'end': '2014-04-27T17:29:30+01:00',
+                            'start': '2014-04-27T17:26:30+01:00',
+                        },
+                        'slot': {
+                            'end': '2014-04-27T17:30:00+01:00',
+                            'start': '2014-04-27T17:25:00+01:00',
+                        },
+                        'staging': {
+                            'opens': '2014-04-27T17:21:30+01:00',
+                            'closes': '2014-04-27T17:24:30+01:00',
+                            'signal_teams': '2014-04-27T17:22:30+01:00',
+                            'signal_shepherds': {
+                                'Blue': '2014-04-27T17:22:29+01:00',
+                                'Green': '2014-04-27T17:23:29+01:00',
+                            },
+                        },
+                    },
+                    'teams': ['???', '???', '???', '???'],
+                },
+            ],
+            'last_scored': 99,
+        }
+        self.assertEqual(
+            expected,
+            self.server_get('/matches?game_start_time=2014-04-27T17:26:30%2B01:00'),
+        )
+
+    def test_invalid_match_filter_spacey_time(self) -> None:
+        with self.assertRaisesApiError('BadRequest', 400):
+            self.server_get('/matches?game_start_time=2014-04-27T17:26:30+01:00')
+
+    def test_invalid_match_filter_naive_time(self) -> None:
+        with self.assertRaisesApiError('BadRequest', 400):
+            self.server_get('/matches?game_start_time=2014-04-27T17:26:30')
+
+    def test_invalid_match_filter_naive_time_range(self) -> None:
+        with self.assertRaisesApiError('BadRequest', 400):
+            self.server_get('/matches?game_start_time=2014-04-27T17:26:30..')
 
     def test_last_scored(self) -> None:
         self.assertEqual(

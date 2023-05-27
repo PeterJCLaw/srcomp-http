@@ -279,7 +279,10 @@ def matches() -> Response:
                 "Did you pass in a '+'?",
             )
         else:
-            return dateutil.parser.parse(string)
+            when = dateutil.parser.parse(string)
+            if when.tzinfo is None:
+                raise errors.BadRequest("Date string must include a timezone.")
+            return when
 
     filters: Any = [  # TODO: re-work this to get checking
         ('type', MatchType, lambda x: x['type']),
