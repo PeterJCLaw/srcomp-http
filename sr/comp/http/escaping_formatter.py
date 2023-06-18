@@ -4,7 +4,7 @@ import logging
 class EscapingFormatter(logging.Formatter):
     """A class that formats log output nicely."""
 
-    def format(  # noqa:A003 # name `format` is defined by parent class
+    def format(  # noqa: A003 # name `format` is defined by parent class
         self,
         record: logging.LogRecord,
     ) -> str:
