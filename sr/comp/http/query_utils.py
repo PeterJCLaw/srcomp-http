@@ -51,6 +51,7 @@ class _MatchInfo(TypedDict):
     display_name: str
     arena: ArenaName
     teams: list[TLA | None]
+    teams_by_corner: dict[str, TLA | None]
     type: str  # noqa:A003
     times: MatchTimings
 
@@ -81,11 +82,20 @@ def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
     match_slot_lengths = comp.schedule.match_slot_lengths
     staging_times = comp.schedule.get_staging_times(match)
 
+    teams_by_corner = {
+        str(corner): team
+        for corner, team in zip(
+            comp.corners,
+            match.teams,
+        )
+    }
+
     info = MatchInfo({
         'num': match.num,
         'display_name': match.display_name,
         'arena': match.arena,
         'teams': match.teams,
+        'teams_by_corner': teams_by_corner,
         'type': match.type.value,
         'times': {
             'slot': {
