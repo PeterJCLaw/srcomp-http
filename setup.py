@@ -12,7 +12,7 @@ setup(
         'Code': 'https://github.com/PeterJCLaw/srcomp-http',
         'Issue tracker': 'https://github.com/PeterJCLaw/srcomp-http/issues',
     },
-    packages=find_namespace_packages(exclude=('tests',)),
+    packages=find_namespace_packages(include=['sr.*']),
     namespace_packages=['sr', 'sr.comp'],
     package_data={'sr.comp.http': ['logging-*.ini']},
     description="HTTP API for Student Robotics Competition Software",
