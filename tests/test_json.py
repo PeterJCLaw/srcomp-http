@@ -1,7 +1,7 @@
 import unittest
 from enum import Enum
 
-from sr.comp.http.json_encoder import JsonEncoder
+from sr.comp.http.json_provider import JsonEncoder
 
 
 class JsonTests(unittest.TestCase):

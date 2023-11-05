@@ -1,9 +1,11 @@
 """JSON formatting routines."""
 
 import datetime
+import json
 from enum import Enum
 from typing import Any
 
+import flask.json.provider
 import simplejson
 from flask import g
 from werkzeug.http import http_date
@@ -39,3 +41,15 @@ class JsonEncoder(simplejson.JSONEncoder):
             return http_date(obj.timetuple())
         else:
             return super().default(obj)
+
+
+class JsonProvider(flask.json.provider.DefaultJSONProvider):
+    def dumps(self, *args: Any, **kwargs: Any) -> str:
+        # Don't user super() as that also sets other things we don't want,
+        # namely `ensure_ascii` and `default`.
+        kwargs.setdefault('sort_keys', self.sort_keys)
+        return json.dumps(
+            *args,
+            cls=JsonEncoder,  # type: ignore[arg-type]
+            **kwargs,
+        )

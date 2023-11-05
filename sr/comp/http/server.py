@@ -7,14 +7,22 @@ from typing import Any, Mapping, Union
 import dateutil.parser
 import dateutil.tz
 import werkzeug.exceptions
-from flask import abort, Flask, g, jsonify, request, send_file, url_for
+from flask import (
+    abort,
+    Flask,
+    g,
+    jsonify,
+    request,
+    Response,
+    send_file,
+    url_for,
+)
 from pkg_resources import Distribution, working_set
-from werkzeug import Response
 
 from sr.comp.arenas import Arena, Corner, CornerNumber
 from sr.comp.comp import SRComp
 from sr.comp.http import errors
-from sr.comp.http.json_encoder import JsonEncoder
+from sr.comp.http.json_provider import JsonProvider
 from sr.comp.http.manager import SRCompManager
 from sr.comp.http.query_utils import match_json_info, parse_difference_string
 from sr.comp.match_period import MatchPeriod, MatchType
@@ -24,7 +32,7 @@ from sr.comp.types import ArenaName, MatchNumber, Region, RegionName, TLA
 from .query_utils import MatchInfo
 
 app = Flask('sr.comp.http')
-app.json_encoder = JsonEncoder  # type: ignore[assignment]
+app.json = JsonProvider(app)
 
 comp_man = SRCompManager()
 
