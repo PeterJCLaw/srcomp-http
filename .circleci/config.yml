@@ -137,7 +137,7 @@ jobs:
           name: Build the docs
           command: |
             source venv/bin/activate
-            python setup.py build_sphinx
+            ./script/docs/build.sh
 
   lint:
     <<: *parametrised-python-executor
