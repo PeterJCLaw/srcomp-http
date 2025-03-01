@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import datetime
+import importlib.metadata
 import os.path
-from typing import Any, Mapping, Union
+from typing import Any, Union
 
 import dateutil.parser
 import dateutil.tz
@@ -17,7 +18,6 @@ from flask import (
     send_file,
     url_for,
 )
-from pkg_resources import Distribution, working_set
 
 from sr.comp.arenas import Arena, Corner, CornerNumber
 from sr.comp.comp import SRComp
@@ -238,22 +238,22 @@ def state() -> Response:
 
 def get_config_dict(comp: SRComp) -> dict[str, Any]:
     LIBRARIES = ('sr.comp', 'sr.comp.http', 'sr.comp.ranker', 'league_ranker', 'flask')
-
-    working_set_by_key: Mapping[str, Distribution] = (
-        # WorkingSet.by_key is not declared in the typeshed
-        working_set.by_key   # type: ignore[attr-defined]
-    )
+    versions = {}
+    for library in LIBRARIES:
+        try:
+            distribution = importlib.metadata.distribution(library)
+            # TODO(python-upgrade): In 3.10+ we can move to .name over .metadata['Name']
+            name = distribution.metadata['Name']
+            versions[name] = importlib.metadata.version(library)
+        except importlib.metadata.PackageNotFoundError:
+            pass
 
     return {
         'match_slots': {
             k: int(v.total_seconds())
             for k, v in comp.schedule.match_slot_lengths.items()
         },
-        'server': {
-            library: working_set_by_key[library].version
-            for library in LIBRARIES
-            if library in working_set_by_key
-        },
+        'server': versions,
         'ping_period': 10,
     }
 
