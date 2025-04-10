@@ -237,6 +237,7 @@ def state() -> Response:
 
 
 def get_config_dict(comp: SRComp) -> dict[str, Any]:
+    # Note: consider the security implications when adding libraries to this list.
     LIBRARIES = ('sr.comp', 'sr.comp.http', 'sr.comp.ranker', 'league_ranker', 'flask')
     versions = {}
     for library in LIBRARIES:
