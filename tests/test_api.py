@@ -28,6 +28,7 @@ MATCH_0 = [
             'league': {'CLY': 8, 'TTN': 6},
             'ranking': {'CLY': 1, 'TTN': 2},
         },
+        'state': 'released',
         'times': {
             'slot': {
                 'start': '2014-04-26T13:00:00+01:00',
@@ -36,6 +37,9 @@ MATCH_0 = [
             'game': {
                 'start': '2014-04-26T13:01:30+01:00',
                 'end': '2014-04-26T13:04:30+01:00',
+            },
+            'operations': {
+                'release_threshold': '2014-04-26T13:01:30+01:00',
             },
             'staging': {
                 'opens': '2014-04-26T12:56:30+01:00',
@@ -59,6 +63,7 @@ MATCH_0 = [
             'league': {'QMC': 6, 'GRS': 8},
             'ranking': {'QMC': 2, 'GRS': 1},
         },
+        'state': 'released',
         'times': {
             'slot': {
                 'start': '2014-04-26T13:00:00+01:00',
@@ -67,6 +72,9 @@ MATCH_0 = [
             'game': {
                 'start': '2014-04-26T13:01:30+01:00',
                 'end': '2014-04-26T13:04:30+01:00',
+            },
+            'operations': {
+                'release_threshold': '2014-04-26T13:01:30+01:00',
             },
             'staging': {
                 'opens': '2014-04-26T12:56:30+01:00',
@@ -338,6 +346,7 @@ class ApiTests(unittest.TestCase):
                         'league': {'CLY': 8, 'TTN': 6},
                         'ranking': {'CLY': 1, 'TTN': 2},
                     },
+                    'state': 'released',
                     'times': {
                         'slot': {
                             'start': '2014-04-26T13:00:00+01:00',
@@ -346,6 +355,9 @@ class ApiTests(unittest.TestCase):
                         'game': {
                             'start': '2014-04-26T13:01:30+01:00',
                             'end': '2014-04-26T13:04:30+01:00',
+                        },
+                        'operations': {
+                            'release_threshold': '2014-04-26T13:01:30+01:00',
                         },
                         'staging': {
                             'opens': '2014-04-26T12:56:30+01:00',
@@ -380,6 +392,7 @@ class ApiTests(unittest.TestCase):
                         'league': {'CLY': 8, 'TTN': 6},
                         'ranking': {'CLY': 1, 'TTN': 2},
                     },
+                    'state': 'released',
                     'times': {
                         'slot': {
                             'start': '2014-04-26T13:00:00+01:00',
@@ -388,6 +401,9 @@ class ApiTests(unittest.TestCase):
                         'game': {
                             'start': '2014-04-26T13:01:30+01:00',
                             'end': '2014-04-26T13:04:30+01:00',
+                        },
+                        'operations': {
+                            'release_threshold': '2014-04-26T13:01:30+01:00',
                         },
                         'staging': {
                             'opens': '2014-04-26T12:56:30+01:00',
@@ -416,6 +432,7 @@ class ApiTests(unittest.TestCase):
                     'type': 'knockout',
                     'num': 129,
                     'arena': 'A',
+                    'state': 'released',
                     'times': {
                         'game': {
                             'end': '2014-04-27T17:29:30+01:00',
@@ -424,6 +441,9 @@ class ApiTests(unittest.TestCase):
                         'slot': {
                             'end': '2014-04-27T17:30:00+01:00',
                             'start': '2014-04-27T17:25:00+01:00',
+                        },
+                        'operations': {
+                            'release_threshold': '2014-04-27T17:26:30+01:00',
                         },
                         'staging': {
                             'opens': '2014-04-27T17:21:30+01:00',
@@ -453,6 +473,7 @@ class ApiTests(unittest.TestCase):
                     'type': 'knockout',
                     'num': 129,
                     'arena': 'A',
+                    'state': 'released',
                     'times': {
                         'game': {
                             'end': '2014-04-27T17:29:30+01:00',
@@ -461,6 +482,9 @@ class ApiTests(unittest.TestCase):
                         'slot': {
                             'end': '2014-04-27T17:30:00+01:00',
                             'start': '2014-04-27T17:25:00+01:00',
+                        },
+                        'operations': {
+                            'release_threshold': '2014-04-27T17:26:30+01:00',
                         },
                         'staging': {
                             'opens': '2014-04-27T17:21:30+01:00',
@@ -498,6 +522,7 @@ class ApiTests(unittest.TestCase):
                     'type': 'knockout',
                     'num': 129,
                     'arena': 'A',
+                    'state': 'released',
                     'times': {
                         'game': {
                             'end': '2014-04-27T17:29:30+01:00',
@@ -506,6 +531,9 @@ class ApiTests(unittest.TestCase):
                         'slot': {
                             'end': '2014-04-27T17:30:00+01:00',
                             'start': '2014-04-27T17:25:00+01:00',
+                        },
+                        'operations': {
+                            'release_threshold': '2014-04-27T17:26:30+01:00',
                         },
                         'staging': {
                             'opens': '2014-04-27T17:21:30+01:00',
@@ -661,6 +689,7 @@ class ApiTests(unittest.TestCase):
                     'num': 111,
                     'display_name': 'Match 111',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -669,6 +698,7 @@ class ApiTests(unittest.TestCase):
                     'num': 111,
                     'display_name': 'Match 111',
                     'teams': [None, '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -677,6 +707,7 @@ class ApiTests(unittest.TestCase):
                     'num': 112,
                     'display_name': 'Match 112',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -685,6 +716,7 @@ class ApiTests(unittest.TestCase):
                     'num': 112,
                     'display_name': 'Match 112',
                     'teams': ['???', '???', '???', None],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -693,6 +725,7 @@ class ApiTests(unittest.TestCase):
                     'num': 113,
                     'display_name': 'Match 113',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -701,6 +734,7 @@ class ApiTests(unittest.TestCase):
                     'num': 113,
                     'display_name': 'Match 113',
                     'teams': ['???', '???', '???', None],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -709,6 +743,7 @@ class ApiTests(unittest.TestCase):
                     'num': 114,
                     'display_name': 'Match 114',
                     'teams': ['???', '???', None, '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -717,6 +752,7 @@ class ApiTests(unittest.TestCase):
                     'num': 114,
                     'display_name': 'Match 114',
                     'teams': ['???', None, '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -725,6 +761,7 @@ class ApiTests(unittest.TestCase):
                     'num': 115,
                     'display_name': 'Match 115',
                     'teams': ['???', None, '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -733,6 +770,7 @@ class ApiTests(unittest.TestCase):
                     'num': 115,
                     'display_name': 'Match 115',
                     'teams': [None, '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -741,6 +779,7 @@ class ApiTests(unittest.TestCase):
                     'num': 116,
                     'display_name': 'Match 116',
                     'teams': [None, '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -749,6 +788,7 @@ class ApiTests(unittest.TestCase):
                     'num': 116,
                     'display_name': 'Match 116',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -757,6 +797,7 @@ class ApiTests(unittest.TestCase):
                     'num': 117,
                     'display_name': 'Match 117',
                     'teams': [None, '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -765,6 +806,7 @@ class ApiTests(unittest.TestCase):
                     'num': 117,
                     'display_name': 'Match 117',
                     'teams': ['???', '???', '???', None],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -773,6 +815,7 @@ class ApiTests(unittest.TestCase):
                     'num': 118,
                     'display_name': 'Match 118',
                     'teams': [None, '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -781,6 +824,7 @@ class ApiTests(unittest.TestCase):
                     'num': 118,
                     'display_name': 'Match 118',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -791,6 +835,7 @@ class ApiTests(unittest.TestCase):
                     'num': 119,
                     'display_name': 'Match 119',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -799,6 +844,7 @@ class ApiTests(unittest.TestCase):
                     'num': 119,
                     'display_name': 'Match 119',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -807,6 +853,7 @@ class ApiTests(unittest.TestCase):
                     'num': 120,
                     'display_name': 'Match 120',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -815,6 +862,7 @@ class ApiTests(unittest.TestCase):
                     'num': 120,
                     'display_name': 'Match 120',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -823,6 +871,7 @@ class ApiTests(unittest.TestCase):
                     'num': 121,
                     'display_name': 'Match 121',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -831,6 +880,7 @@ class ApiTests(unittest.TestCase):
                     'num': 121,
                     'display_name': 'Match 121',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -839,6 +889,7 @@ class ApiTests(unittest.TestCase):
                     'num': 122,
                     'display_name': 'Match 122',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -847,6 +898,7 @@ class ApiTests(unittest.TestCase):
                     'num': 122,
                     'display_name': 'Match 122',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -857,6 +909,7 @@ class ApiTests(unittest.TestCase):
                     'num': 123,
                     'display_name': 'Quarter 1 (#123)',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -865,6 +918,7 @@ class ApiTests(unittest.TestCase):
                     'num': 124,
                     'display_name': 'Quarter 2 (#124)',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -873,6 +927,7 @@ class ApiTests(unittest.TestCase):
                     'num': 125,
                     'display_name': 'Quarter 3 (#125)',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -881,6 +936,7 @@ class ApiTests(unittest.TestCase):
                     'num': 126,
                     'display_name': 'Quarter 4 (#126)',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -891,6 +947,7 @@ class ApiTests(unittest.TestCase):
                     'num': 127,
                     'display_name': 'Semi 1 (#127)',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -899,6 +956,7 @@ class ApiTests(unittest.TestCase):
                     'num': 128,
                     'display_name': 'Semi 2 (#128)',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -909,6 +967,7 @@ class ApiTests(unittest.TestCase):
                     'num': 129,
                     'display_name': 'Final (#129)',
                     'teams': ['???', '???', '???', '???'],
+                    'state': 'released',
                     'times': None,
                     'type': 'knockout',
                 },
@@ -916,7 +975,7 @@ class ApiTests(unittest.TestCase):
         ]
         actual_rounds = self.server_get('knockout')['rounds']
 
-        times_keys = ['game', 'slot', 'staging']
+        times_keys = ['game', 'operations', 'slot', 'staging']
         for r in actual_rounds:
             for m in r:
                 with self.subTest(match=m):
