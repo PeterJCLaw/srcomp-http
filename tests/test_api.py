@@ -81,6 +81,7 @@ MATCH_0 = [
 
 class ApiError(Exception):
     def __init__(self, name: str, code: int) -> None:
+        super().__init__(name, code)
         self.name = name
         self.code = code
 
