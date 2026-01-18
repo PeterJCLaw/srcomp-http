@@ -243,9 +243,7 @@ def get_config_dict(comp: SRComp) -> dict[str, Any]:
     for library in LIBRARIES:
         try:
             distribution = importlib.metadata.distribution(library)
-            # TODO(python-upgrade): In 3.10+ we can move to .name over .metadata['Name']
-            name = distribution.metadata['Name']
-            versions[name] = importlib.metadata.version(library)
+            versions[distribution.name] = importlib.metadata.version(library)
         except importlib.metadata.PackageNotFoundError:
             pass
 
