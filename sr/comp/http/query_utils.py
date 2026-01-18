@@ -71,7 +71,7 @@ class MatchInfo(_MatchInfo, total=False):
 TParseable = TypeVar('TParseable', int, str, datetime.datetime)
 
 
-def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
+def match_json_info(comp: SRComp, match: Match, when: datetime.datetime) -> MatchInfo:
     """
     Get match JSON information.
 
@@ -81,6 +81,8 @@ def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
         A competition instance.
     match : sr.comp.match_periods.Match
         A match.
+    when : datetime.datetime
+        The current time.
 
     Returns
     -------
@@ -88,7 +90,7 @@ def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
         A :class:`dict` containing JSON suitable output.
     """
     arena_times = comp.operations.get_arena_times(match)
-    state = comp.operations.get_match_state(match)
+    state = comp.operations.get_match_state(match, when)
     staging_times = comp.schedule.get_staging_times(match)
 
     info = MatchInfo({
