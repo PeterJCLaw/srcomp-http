@@ -8,7 +8,8 @@ import fcntl
 import logging
 import os
 import time
-from typing import IO, Iterator
+from collections.abc import Iterator
+from typing import IO
 
 from sr.comp.comp import SRComp
 

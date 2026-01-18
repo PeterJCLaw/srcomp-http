@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import datetime
-from typing import Callable, Mapping, overload, TypeVar, Union
+from collections.abc import Mapping
+from typing import Callable, overload, TypeVar, Union
 from typing_extensions import TypedDict
 
 from league_ranker import LeaguePoints, RankedPosition

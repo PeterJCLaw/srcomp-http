@@ -31,6 +31,6 @@ class JsonTests(unittest.TestCase):
             yup = val
 
         output = encoder.encode(Thing.yup)
-        expected = '"{}"'.format(val)
+        expected = f'"{val}"'
 
         self.assertEqual(expected, output)

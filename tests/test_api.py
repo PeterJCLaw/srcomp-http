@@ -1,14 +1,17 @@
+from __future__ import annotations
+
 import contextlib
 import os.path
 import unittest
-from typing import Any, Iterable, Iterator, Mapping, Tuple
+from collections.abc import Iterable, Iterator, Mapping
+from typing import Any
 
 from flask.testing import FlaskClient
 from freezegun import freeze_time
 
 from sr.comp.http import app
 
-FlaskTestResponse = Tuple[Iterable[bytes], str, Mapping[str, str]]
+FlaskTestResponse = tuple[Iterable[bytes], str, Mapping[str, str]]
 
 COMPSTATE = os.path.join(os.path.dirname(__file__), 'dummy')
 app.config['COMPSTATE'] = COMPSTATE
