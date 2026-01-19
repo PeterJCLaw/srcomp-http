@@ -34,6 +34,12 @@ class Times(TypedDict):
     end: str
 
 
+class OpsTimes(TypedDict):
+    # TODO: I don't like this name here. It fits for consistency with its other
+    # uses, however it doesn't fit so well alongside e.g: start/end, opens/closes.
+    release_threshold: str
+
+
 class StagingTimes(TypedDict):
     opens: str
     closes: str
@@ -43,6 +49,7 @@ class StagingTimes(TypedDict):
 
 class MatchTimings(TypedDict):
     slot: Times
+    operations: OpsTimes
     game: Times
     staging: StagingTimes
 
@@ -53,6 +60,7 @@ class _MatchInfo(TypedDict):
     arena: ArenaName
     teams: list[TLA | None]
     type: str  # noqa:A003
+    state: str
     times: MatchTimings
 
 
@@ -63,7 +71,7 @@ class MatchInfo(_MatchInfo, total=False):
 TParseable = TypeVar('TParseable', int, str, datetime.datetime)
 
 
-def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
+def match_json_info(comp: SRComp, match: Match, when: datetime.datetime) -> MatchInfo:
     """
     Get match JSON information.
 
@@ -73,13 +81,16 @@ def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
         A competition instance.
     match : sr.comp.match_periods.Match
         A match.
+    when : datetime.datetime
+        The current time.
 
     Returns
     -------
     dict
         A :class:`dict` containing JSON suitable output.
     """
-    match_slot_lengths = comp.schedule.match_slot_lengths
+    arena_times = comp.operations.get_arena_times(match)
+    state = comp.operations.get_match_state(match, when)
     staging_times = comp.schedule.get_staging_times(match)
 
     info = MatchInfo({
@@ -88,21 +99,18 @@ def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
         'arena': match.arena,
         'teams': match.teams,
         'type': match.type.value,
+        'state': state.value,
         'times': {
             'slot': {
                 'start': match.start_time.isoformat(),
                 'end': match.end_time.isoformat(),
             },
+            'operations': {
+                'release_threshold': arena_times.release_threshold.isoformat(),
+            },
             'game': {
-                'start': (
-                    match.start_time +
-                    match_slot_lengths['pre']
-                ).isoformat(),
-                'end': (
-                    match.start_time +
-                    match_slot_lengths['pre'] +
-                    match_slot_lengths['match']
-                ).isoformat(),
+                'start': arena_times.start.isoformat(),
+                'end': arena_times.end.isoformat(),
             },
             'staging': {
                 'opens': staging_times['opens'].isoformat(),

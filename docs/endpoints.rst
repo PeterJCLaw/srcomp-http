@@ -301,6 +301,9 @@ limits start from the last match and work backwards.
                         "end": "...",
                         "start": "..."
                     },
+                    "operations": {
+                        "release_threshold": "...",
+                    },
                     "slot": {
                         "end": "...",
                         "start": "..."
