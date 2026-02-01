@@ -140,9 +140,13 @@ the current time.
         "time": "..."
     }
 
-The ``delay`` value is the amount of delay in seconds currently active.
-Note that this value is only useful during match periods (it will otherwise
-be ``0``).
+The ``delay`` value is the amount of committed delay in seconds currently
+active. This does not account for matches which have not yet been released but
+which have passed their release threshold. Delays from belated match releases
+will appear only when the match is eventually released (and the corresponding
+delay is committed into the state).
+Note that this value is only useful during match periods (it will otherwise be
+``0``).
 
 The ``matches`` key is a list of the matches which are currently being
 played, as measured by the current time falling between the start and end
@@ -159,7 +163,13 @@ being shepherded for, as measured by the current time falling between the
 earliest shepherding signal value and time when staging closes. They are
 presented in the same format as the `/matches`_ endpoint uses.
 
-The ``time`` key is the current time on the server.
+Each of ``matches``, ``staging_matches``, ``shepherding_matches`` accounts for
+the match releasing mechanism. In the case of a match not being released "on
+time" then it and subsequent matches are held back and will remain in their
+corresponding keys as if time had stopped at the release threshold.
+
+The ``time`` key is the current time on the server. This value progresses
+regardless of match holds.
 
 /state
 ------
