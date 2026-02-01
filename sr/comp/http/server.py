@@ -263,6 +263,12 @@ def config() -> Response:
     return jsonify(config=get_config_dict(comp))
 
 
+@app.route("/matches/last_released")
+def last_released_match() -> Response:
+    comp: SRComp = g.comp_man.get_comp()
+    return jsonify(last_released=comp.operations.last_released_match)
+
+
 @app.route("/matches/last_scored")
 def last_scored_match() -> Response:
     comp: SRComp = g.comp_man.get_comp()
@@ -272,10 +278,11 @@ def last_scored_match() -> Response:
 @app.route("/matches")
 def matches() -> Response:
     comp: SRComp = g.comp_man.get_comp()
+    now = comp.schedule.datetime_now
     matches: list[MatchInfo] = []
     for slots in comp.schedule.matches:
         matches.extend(
-            match_json_info(comp, match)
+            match_json_info(comp, match, now)
             for match in slots.values()
         )
 
@@ -338,7 +345,11 @@ def matches() -> Response:
         else:
             raise AssertionError("Limit isn't a number?")
 
-    return jsonify(matches=matches, last_scored=comp.scores.last_scored_match)
+    return jsonify(
+        matches=matches,
+        last_released=comp.operations.last_released_match,
+        last_scored=comp.scores.last_scored_match,
+    )
 
 
 @app.route("/periods")
@@ -372,36 +383,23 @@ def current_state() -> Response:
     delay = comp.schedule.delay_at(time)
     delay_seconds = int(delay.total_seconds())
 
-    matches = [
-        match_json_info(comp, x)
-        for x in comp.schedule.matches_at(time)
-    ]
-
-    staging_matches = []
-    shepherding_matches = []
-    for slot in comp.schedule.matches:
-        for match in slot.values():
-            staging_times = comp.schedule.get_staging_times(match)
-
-            if time > staging_times['closes']:
-                # Already done staging
-                continue
-
-            if staging_times['opens'] <= time:
-                staging_matches.append(match_json_info(comp, match))
-
-            signal_shepherds = staging_times['signal_shepherds']
-            if signal_shepherds:
-                first_signal = min(signal_shepherds.values())
-                if first_signal <= time:
-                    shepherding_matches.append(match_json_info(comp, match))
+    current_matches = comp.operations.get_matches_at(time)
 
     return jsonify(
         delay=delay_seconds,
         time=time.isoformat(),
-        matches=matches,
-        staging_matches=staging_matches,
-        shepherding_matches=shepherding_matches,
+        matches=[
+            match_json_info(comp, x, time)
+            for x in current_matches.matches
+        ],
+        staging_matches=[
+            match_json_info(comp, x, time)
+            for x in current_matches.staging_matches
+        ],
+        shepherding_matches=[
+            match_json_info(comp, x, time)
+            for x in current_matches.shepherding_matches
+        ],
     )
 
 

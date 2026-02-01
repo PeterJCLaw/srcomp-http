@@ -34,7 +34,7 @@ class JsonEncoder(simplejson.JSONEncoder):
             return obj.value
         elif isinstance(obj, Match):
             comp: SRComp = g.comp_man.get_comp()
-            return match_json_info(comp, obj)
+            return match_json_info(comp, obj, comp.schedule.datetime_now)
         elif isinstance(obj, datetime.datetime):
             return http_date(obj.utctimetuple())
         elif isinstance(obj, datetime.date):

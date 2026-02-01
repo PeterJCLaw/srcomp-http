@@ -20,6 +20,7 @@ setup(
     author="Student Robotics Competition Software SIG",
     author_email="srobo-devel@googlegroups.com",
     install_requires=[
+        # TODO(PR): bump srcomp version once we know what version will include match-release
         'sr.comp >=1.5, <2',
         'Flask >=2.2',
         'Werkzeug >= 2, <4',
