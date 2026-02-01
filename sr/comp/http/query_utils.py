@@ -10,6 +10,7 @@ from typing_extensions import TypedDict
 from league_ranker import LeaguePoints, RankedPosition
 
 from sr.comp.comp import SRComp
+from sr.comp.match_operations import MatchState
 from sr.comp.match_period import Match, MatchType
 from sr.comp.types import ArenaName, GamePoints, MatchNumber, ShepherdName, TLA
 
@@ -60,7 +61,7 @@ class _MatchInfo(TypedDict):
     arena: ArenaName
     teams: list[TLA | None]
     type: str  # noqa:A003
-    state: str
+    is_released: bool
     times: MatchTimings
 
 
@@ -99,7 +100,7 @@ def match_json_info(comp: SRComp, match: Match, when: datetime.datetime) -> Matc
         'arena': match.arena,
         'teams': match.teams,
         'type': match.type.value,
-        'state': state.value,
+        'is_released': state == MatchState.RELEASED,
         'times': {
             'slot': {
                 'start': match.start_time.isoformat(),

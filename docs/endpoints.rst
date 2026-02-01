@@ -268,6 +268,7 @@ limits start from the last match and work backwards.
                 "arena": "...",
                 "display_name": "Match ...",
                 "num": "...",
+                "is_released": "bool",
                 "scores": {
                     "game": {
                         "...": "...",
