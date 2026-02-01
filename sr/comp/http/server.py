@@ -263,6 +263,12 @@ def config() -> Response:
     return jsonify(config=get_config_dict(comp))
 
 
+@app.route("/matches/last_released")
+def last_released_match() -> Response:
+    comp: SRComp = g.comp_man.get_comp()
+    return jsonify(last_released=comp.operations.last_released_match)
+
+
 @app.route("/matches/last_scored")
 def last_scored_match() -> Response:
     comp: SRComp = g.comp_man.get_comp()
@@ -339,7 +345,11 @@ def matches() -> Response:
         else:
             raise AssertionError("Limit isn't a number?")
 
-    return jsonify(matches=matches, last_scored=comp.scores.last_scored_match)
+    return jsonify(
+        matches=matches,
+        last_released=comp.operations.last_released_match,
+        last_scored=comp.scores.last_scored_match,
+    )
 
 
 @app.route("/periods")

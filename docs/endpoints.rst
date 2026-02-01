@@ -261,6 +261,7 @@ limits start from the last match and work backwards.
 .. code-block:: json
 
     {
+        "last_released": "...",
         "last_scored": "...",
         "matches": [
             {
@@ -322,7 +323,8 @@ limits start from the last match and work backwards.
         ]
     }
 
-``last_scored`` contains the same value as in the following endpoint.
+``last_released`` contains the same value as in its endpoint below.
+``last_scored`` contains the same value as in its endpoint below.
 Any dates are in ISO 8601 format.
 
 Only one of the ``league`` or ``normalised`` sub-keys of ``scores`` will be
@@ -335,6 +337,18 @@ normalised (league) score of zero but will still have a position value.
 The staging deadline is available in ``times.staging.closes`` while the
 ``times.staging.signal_shepherds`` value is when shepherds should start looking
 for teams although this isn't a strict value.
+
+/matches/last_released
+----------------------
+
+.. code-block:: json
+
+    {
+        "last_released": "..."
+    }
+
+``last_released`` contains the highest match number which has been released,
+but may be ``null`` if no matches have yet been released.
 
 /matches/last_scored
 --------------------

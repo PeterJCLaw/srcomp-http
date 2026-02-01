@@ -152,6 +152,7 @@ class ApiTests(unittest.TestCase):
             '/matches?arena=B&num=1',
             '/matches?type=knockout',
             '/matches?type=league&limit=10',
+            '/matches/last_released',
             '/matches/last_scored',
             '/periods',
             '/state',
@@ -371,6 +372,7 @@ class ApiTests(unittest.TestCase):
                     },
                 },
             ],
+            'last_released': 129,
             'last_scored': 99,
         }
         self.assertEqual(
@@ -417,6 +419,7 @@ class ApiTests(unittest.TestCase):
                     },
                 },
             ],
+            'last_released': 129,
             'last_scored': 99,
         }
         self.assertEqual(
@@ -458,6 +461,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                 },
             ],
+            'last_released': 129,
             'last_scored': 99,
         }
         self.assertEqual(
@@ -499,6 +503,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                 },
             ],
+            'last_released': 129,
             'last_scored': 99,
         }
         self.assertEqual(
@@ -548,6 +553,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                 },
             ],
+            'last_released': 129,
             'last_scored': 99,
         }
         self.assertEqual(
@@ -571,6 +577,12 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(
             {'last_scored': 99},
             self.server_get('/matches/last_scored'),
+        )
+
+    def test_last_released(self) -> None:
+        self.assertEqual(
+            {'last_released': 129},
+            self.server_get('/matches/last_released'),
         )
 
     def test_invalid_match_type(self) -> None:
