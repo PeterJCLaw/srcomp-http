@@ -46,7 +46,7 @@ For tests to work, you will need to clone the `tests/dummy` submodule too:
 
 .. code:: shell
 
-    pip install -e .
+    uv sync
 
 **Run**:
 ``./run $COMPSTATE``.
