@@ -5,7 +5,7 @@ from __future__ import annotations
 import datetime
 from collections.abc import Mapping
 from typing import Callable, overload, TypeVar, Union
-from typing_extensions import TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 from league_ranker import LeaguePoints, RankedPosition
 
@@ -47,17 +47,15 @@ class MatchTimings(TypedDict):
     staging: StagingTimes
 
 
-class _MatchInfo(TypedDict):
+class MatchInfo(TypedDict):
     num: MatchNumber
     display_name: str
     arena: ArenaName
     teams: list[TLA | None]
     type: str  # noqa:A003
     times: MatchTimings
-
-
-class MatchInfo(_MatchInfo, total=False):
-    scores: MatchScoreDict
+    # Scores not provided until the match has been scored
+    scores: NotRequired[MatchScoreDict]
 
 
 TParseable = TypeVar('TParseable', int, str, datetime.datetime)
