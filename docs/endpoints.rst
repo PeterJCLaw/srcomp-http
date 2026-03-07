@@ -382,6 +382,27 @@ Get a list of rounds which make up the knockouts. Each round is expressed
 as a list of matches which make up that round. Matches are expressed using
 the same format as the `/matches`_ endpoint.
 
+.. code-block:: json
+
+    {
+        "rounds": [
+            [
+                "...",
+                "...",
+                "...",
+                "..."
+            ],
+            [
+                "...",
+                "..."
+            ],
+            [
+                "..."
+            ]
+        ]
+    }
+
+
 /tiebreaker
 -----------
 
