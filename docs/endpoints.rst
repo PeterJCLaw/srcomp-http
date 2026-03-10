@@ -140,9 +140,13 @@ the current time.
         "time": "..."
     }
 
-The ``delay`` value is the amount of delay in seconds currently active.
-Note that this value is only useful during match periods (it will otherwise
-be ``0``).
+The ``delay`` value is the amount of committed delay in seconds currently
+active. This does not account for matches which have not yet been released but
+which have passed their release threshold. Delays from belated match releases
+will appear only when the match is eventually released (and the corresponding
+delay is committed into the state).
+Note that this value is only useful during match periods (it will otherwise be
+``0``).
 
 The ``matches`` key is a list of the matches which are currently being
 played, as measured by the current time falling between the start and end
@@ -159,7 +163,13 @@ being shepherded for, as measured by the current time falling between the
 earliest shepherding signal value and time when staging closes. They are
 presented in the same format as the `/matches`_ endpoint uses.
 
-The ``time`` key is the current time on the server.
+Each of ``matches``, ``staging_matches``, ``shepherding_matches`` accounts for
+the match releasing mechanism. In the case of a match not being released "on
+time" then it and subsequent matches are held back and will remain in their
+corresponding keys as if time had stopped at the release threshold.
+
+The ``time`` key is the current time on the server. This value progresses
+regardless of match holds.
 
 /state
 ------
@@ -261,12 +271,14 @@ limits start from the last match and work backwards.
 .. code-block:: json
 
     {
+        "last_released": "...",
         "last_scored": "...",
         "matches": [
             {
                 "arena": "...",
                 "display_name": "Match ...",
                 "num": "...",
+                "is_released": "bool",
                 "scores": {
                     "game": {
                         "...": "...",
@@ -301,6 +313,9 @@ limits start from the last match and work backwards.
                         "end": "...",
                         "start": "..."
                     },
+                    "operations": {
+                        "release_threshold": "...",
+                    },
                     "slot": {
                         "end": "...",
                         "start": "..."
@@ -319,7 +334,8 @@ limits start from the last match and work backwards.
         ]
     }
 
-``last_scored`` contains the same value as in the following endpoint.
+``last_released`` contains the same value as in its endpoint below.
+``last_scored`` contains the same value as in its endpoint below.
 Any dates are in ISO 8601 format.
 
 Only one of the ``league`` or ``normalised`` sub-keys of ``scores`` will be
@@ -332,6 +348,18 @@ normalised (league) score of zero but will still have a position value.
 The staging deadline is available in ``times.staging.closes`` while the
 ``times.staging.signal_shepherds`` value is when shepherds should start looking
 for teams although this isn't a strict value.
+
+/matches/last_released
+----------------------
+
+.. code-block:: json
+
+    {
+        "last_released": "..."
+    }
+
+``last_released`` contains the highest match number which has been released,
+but may be ``null`` if no matches have yet been released.
 
 /matches/last_scored
 --------------------
