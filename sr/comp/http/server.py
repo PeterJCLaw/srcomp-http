@@ -72,10 +72,9 @@ def format_arena(arena: Arena) -> dict[str, Any]:
         'get': url_for('get_arena', name=arena.name),
         'name': arena.name,
         'display_name': arena.display_name,
-        'colour': arena.colour,
     }
-    if not arena.colour:
-        del data['colour']
+    if arena.colour:
+        data['colour'] = arena.colour
     return data
 
 
