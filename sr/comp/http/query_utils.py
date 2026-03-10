@@ -10,7 +10,7 @@ from typing_extensions import NotRequired, TypedDict
 from league_ranker import LeaguePoints, RankedPosition
 
 from sr.comp.comp import SRComp
-from sr.comp.match_period import Match, MatchType
+from sr.comp.match_period import KnockoutMatch, Match, MatchType
 from sr.comp.types import ArenaName, GamePoints, MatchNumber, ShepherdName, TLA
 
 
@@ -135,12 +135,9 @@ def match_json_info(comp: SRComp, match: Match) -> MatchInfo | KnockoutMatchInfo
             }
 
     if match.type == MatchType.knockout:
+        assert isinstance(match, KnockoutMatch)
         info = KnockoutMatchInfo({
-            'knockout_bracket': (
-                'lower-bracket'
-                if match.display_name.startswith("Lower")
-                else 'upper-bracket'
-            ),
+            'knockout_bracket': match.knockout_bracket,
             **info,
         })
 
