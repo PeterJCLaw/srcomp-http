@@ -1,0 +1,90 @@
+[project]
+name = 'sr.comp.http'
+version = '1.9.0'
+description = "HTTP API for Student Robotics Competition Software"
+authors = [
+    { name = "Student Robotics Competition Software SIG", email = 'srobo-devel@googlegroups.com' },
+]
+readme = 'README.rst'
+license-files = ["AUTHORS.rst", "LICENSE"]
+classifiers = [
+    'Intended Audience :: Developers',
+    'Intended Audience :: System Administrators',
+    'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+    'Operating System :: POSIX :: Linux',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
+    'Programming Language :: Python :: 3.14',
+    'Programming Language :: Python :: 3 :: Only',
+    'Topic :: Internet :: WWW/HTTP',
+    'Topic :: Internet :: WWW/HTTP :: WSGI :: Application',
+]
+
+requires-python = '>=3.10'
+dependencies = [
+    'sr.comp >=1.5, <2',
+    'Flask >=2.2',
+    'Werkzeug >= 2, <4',
+    'simplejson >=3.6, <4',
+    'python-dateutil >=2.2, <3',
+    'typing-extensions >=3.7.4.2, <5',
+]
+
+[project.scripts]
+srcomp-update = 'sr.comp.http.update:main'
+
+[project.urls]
+Documentation = 'https://srcomp-http.readthedocs.org/'
+'Issue tracker' = 'https://github.com/PeterJCLaw/srcomp-http/issues'
+Repository = 'https://github.com/PeterJCLaw/srcomp-http'
+
+[build-system]
+requires = ['uv_build>=0.10.0,<0.11.0']
+build-backend = 'uv_build'
+
+[tool.uv.build-backend]
+module-name = "sr"
+module-root = ""
+namespace = true
+source-include = [
+    "sr/comp/http/logging-*.ini",
+]
+
+[dependency-groups]
+dev = [
+    { include-group = "docs" },
+    { include-group = "linting" },
+    { include-group = "testing" },
+    { include-group = "typing" },
+]
+docs = [
+    "sphinx>6",
+]
+linting = [
+    "flake8>=5",
+    "flake8-balanced-wrapping>=0.1.7",
+    "flake8-bugbear>=25.11.29",
+    "flake8-builtins>=3.1.0",
+    "flake8-commas>=4.0.0",
+    "flake8-comprehensions>=3.17.0",
+    "flake8-debugger>=4.1.2",
+    "flake8-isort>=7.0.0",
+    "flake8-leading-blank-lines>=1.0.4",
+    "flake8-noqa>=1.5.0",
+    "flake8-todo>=0.7",
+    "flake8-tuple>=0.4.1",
+    "isort>=7.0.0",
+]
+testing = [
+    "freezegun >=1, <2",
+]
+typing = [
+    "mypy>=0.940",
+    "types-freezegun>=1.1.10",
+    "types-python-dateutil>=2.9.0.20260124",
+    "types-setuptools>=82.0.0.20260210",
+    "types-simplejson>=3.20.0.20250822",
+]
