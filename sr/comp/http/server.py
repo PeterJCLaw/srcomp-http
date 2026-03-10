@@ -102,11 +102,15 @@ def get_arena(name: str) -> Response:
 def format_location(location: Region) -> dict[str, Any]:
     data: dict[str, Any] = {
         'get': url_for('get_location', name=location['name']),
-        **location,
+        'display_name': location['display_name'],
+        'teams': location['teams'],
+        'shepherds': {
+            'name': location['shepherds']['name'],
+            'colour': location['shepherds']['colour'],
+        },
     }
-    del data['name']
-    if not data.get('description'):
-        data.pop('description', None)
+    if description := location.get('description'):
+        data['description'] = description
     return data
 
 
