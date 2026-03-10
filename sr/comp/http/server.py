@@ -68,8 +68,12 @@ def root() -> Response:
 
 
 def format_arena(arena: Arena) -> dict[str, Any]:
-    data = {'get': url_for('get_arena', name=arena.name)}
-    data.update(arena._asdict())
+    data = {
+        'get': url_for('get_arena', name=arena.name),
+        'name': arena.name,
+        'display_name': arena.display_name,
+        'colour': arena.colour,
+    }
     if not arena.colour:
         del data['colour']
     return data
@@ -204,9 +208,11 @@ def get_team_image(tla: str) -> Response:
 
 
 def format_corner(corner: Corner) -> dict[str, Any]:
-    data = {'get': url_for('get_corner', number=corner.number)}
-    data.update(corner._asdict())
-    return data
+    return {
+        'get': url_for('get_corner', number=corner.number),
+        'number': corner.number,
+        'colour': corner.colour,
+    }
 
 
 @app.route("/corners")
@@ -351,8 +357,13 @@ def match_periods() -> Response:
 
     periods = []
     for match_period in comp.schedule.match_periods:
-        data = match_period._asdict()
-        data.pop('matches')
+        data = {
+            'start_time': match_period.start_time,
+            'end_time': match_period.end_time,
+            'max_end_time': match_period.max_end_time,
+            'description': match_period.description,
+            'type': match_period.type,
+        }
         if match_period.matches:
             data['matches'] = {
                 'first_num': match_num(match_period, 0),
