@@ -136,6 +136,15 @@ def get_location(name: str) -> Response:
     return jsonify(format_location(location))
 
 
+def _team_image_path(team: Team) -> str:
+    return os.path.join(
+        g.comp_man.root_dir,
+        'teams',
+        'images',
+        f'{team.tla}.png',
+    )
+
+
 def team_info(comp: SRComp, team: Team) -> dict[str, Any]:
     scores = comp.scores.league.teams[team.tla]
     league_pos = comp.scores.league.positions[team.tla]
@@ -156,12 +165,7 @@ def team_info(comp: SRComp, team: Team) -> dict[str, Any]:
         },
     }
 
-    if os.path.exists(os.path.join(
-        g.comp_man.root_dir,
-        'teams',
-        'images',
-        f'{team.tla}.png',
-    )):
+    if os.path.exists(_team_image_path(team)):
         info['image_url'] = url_for('get_team_image', tla=team.tla)
 
     return info
@@ -198,12 +202,7 @@ def get_team_image(tla: str) -> Response:
     except KeyError:
         abort(404)
 
-    filename = os.path.join(
-        g.comp_man.root_dir,
-        'teams',
-        'images',
-        f'{team.tla}.png',
-    )
+    filename = _team_image_path(team)
     if os.path.exists(filename):
         return send_file(filename, mimetype='image/png')
     else:
