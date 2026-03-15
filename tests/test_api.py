@@ -108,7 +108,7 @@ class ApiTests(unittest.TestCase):
             raise ApiError(error['name'], error['code'])
 
         else:
-            raise AssertionError()  # server error
+            raise AssertionError("Unknown server error")
 
     @contextlib.contextmanager
     def assertRaisesApiError(self, name: str, code: int) -> Iterator[None]:
