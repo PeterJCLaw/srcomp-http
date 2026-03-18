@@ -10,7 +10,7 @@ from typing_extensions import NotRequired, TypedDict
 from league_ranker import LeaguePoints, RankedPosition
 
 from sr.comp.comp import SRComp
-from sr.comp.match_period import Match, MatchType
+from sr.comp.match_period import KnockoutMatch, Match, MatchType
 from sr.comp.types import ArenaName, GamePoints, MatchNumber, ShepherdName, TLA
 
 
@@ -58,10 +58,14 @@ class MatchInfo(TypedDict):
     scores: NotRequired[MatchScoreDict]
 
 
+class KnockoutMatchInfo(MatchInfo):
+    knockout_bracket: str
+
+
 TParseable = TypeVar('TParseable', int, str, datetime.datetime)
 
 
-def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
+def match_json_info(comp: SRComp, match: Match) -> MatchInfo | KnockoutMatchInfo:
     """
     Get match JSON information.
 
@@ -129,6 +133,13 @@ def match_json_info(comp: SRComp, match: Match) -> MatchInfo:
                 'normalised': score_info.normalised,
                 'ranking': score_info.ranking,
             }
+
+    if match.type == MatchType.knockout:
+        assert isinstance(match, KnockoutMatch)
+        info = KnockoutMatchInfo({
+            'knockout_bracket': match.knockout_bracket,
+            **info,
+        })
 
     return info
 

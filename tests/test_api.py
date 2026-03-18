@@ -414,6 +414,7 @@ class ApiTests(unittest.TestCase):
                 {
                     'display_name': 'Final (#129)',
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                     'num': 129,
                     'arena': 'A',
                     'times': {
@@ -451,6 +452,7 @@ class ApiTests(unittest.TestCase):
                 {
                     'display_name': 'Final (#129)',
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                     'num': 129,
                     'arena': 'A',
                     'times': {
@@ -496,6 +498,7 @@ class ApiTests(unittest.TestCase):
                 {
                     'display_name': 'Final (#129)',
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                     'num': 129,
                     'arena': 'A',
                     'times': {
@@ -663,6 +666,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'B',
@@ -671,6 +675,7 @@ class ApiTests(unittest.TestCase):
                     'teams': [None, '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -679,6 +684,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'B',
@@ -687,6 +693,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', None],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -695,6 +702,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'B',
@@ -703,6 +711,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', None],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -711,6 +720,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', None, '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'B',
@@ -719,6 +729,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', None, '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -727,6 +738,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', None, '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'B',
@@ -735,6 +747,7 @@ class ApiTests(unittest.TestCase):
                     'teams': [None, '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -743,6 +756,7 @@ class ApiTests(unittest.TestCase):
                     'teams': [None, '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'B',
@@ -751,6 +765,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -759,6 +774,7 @@ class ApiTests(unittest.TestCase):
                     'teams': [None, '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'B',
@@ -767,6 +783,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', None],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -775,6 +792,7 @@ class ApiTests(unittest.TestCase):
                     'teams': [None, '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'B',
@@ -783,6 +801,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
             ],
             [
@@ -793,6 +812,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'B',
@@ -801,6 +821,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -809,6 +830,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'B',
@@ -817,6 +839,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -825,6 +848,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'B',
@@ -833,6 +857,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -841,6 +866,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'B',
@@ -849,6 +875,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
             ],
             [
@@ -859,6 +886,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -867,6 +895,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -875,6 +904,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -883,6 +913,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
             ],
             [
@@ -893,6 +924,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
                 {
                     'arena': 'A',
@@ -901,6 +933,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
             ],
             [
@@ -911,6 +944,7 @@ class ApiTests(unittest.TestCase):
                     'teams': ['???', '???', '???', '???'],
                     'times': None,
                     'type': 'knockout',
+                    'knockout_bracket': 'default',
                 },
             ],
         ]
@@ -951,6 +985,20 @@ class ApiTests(unittest.TestCase):
 
         # Just in case the above is faulty
         self.assertEqual(ref, actual_rounds)
+
+    def test_knockout_structure_key(self) -> None:
+        actual_structure = self.server_get('knockout')['structure']
+        self.assertEqual(
+            {'brackets': [{'name': 'default', 'display_name': "Knockouts"}]},
+            actual_structure,
+        )
+
+    def test_knockout_structure_endpoint(self) -> None:
+        actual_structure = self.server_get('/knockout/structure')
+        self.assertEqual(
+            {'brackets': [{'name': 'default', 'display_name': "Knockouts"}]},
+            actual_structure,
+        )
 
     def test_tiebreaker(self) -> None:
         with self.assertRaisesApiError('NotFound', 404):
