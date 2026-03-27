@@ -399,14 +399,6 @@ same format as the `/matches`_ endpoint.
 .. code-block:: json
 
     {
-        "structure": {
-            "brackets": [
-                {
-                    "name": "...",
-                    "display_name": "..."
-                }
-            ]
-        },
         "rounds": [
             [
                 "...",
@@ -421,7 +413,15 @@ same format as the `/matches`_ endpoint.
             [
                 "..."
             ]
-        ]
+        ],
+        "structure": {
+            "brackets": [
+                {
+                    "name": "...",
+                    "display_name": "..."
+                }
+            ]
+        }
     }
 
 
