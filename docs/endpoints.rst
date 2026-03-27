@@ -266,6 +266,7 @@ limits start from the last match and work backwards.
             {
                 "arena": "...",
                 "display_name": "Match ...",
+                "knockout_bracket": "...",
                 "num": "...",
                 "scores": {
                     "game": {
@@ -326,6 +327,8 @@ Only one of the ``league`` or ``normalised`` sub-keys of ``scores`` will be
 present, though they contain the same data. ``league`` will be present for
 league matches while ``normalised`` will be present for knockout matches.
 
+``knockout_bracket`` is present only for knockout matches.
+
 Notably, teams which are disqualified or no-show from a match will have a
 normalised (league) score of zero but will still have a position value.
 
@@ -378,13 +381,32 @@ matches in this period.
 /knockout
 ---------
 
-Get a list of rounds which make up the knockouts. Each round is expressed
-as a list of matches which make up that round. Matches are expressed using
-the same format as the `/matches`_ endpoint.
+Get information about the knockouts. This comprises structural information
+(currently only a list of "brackets") and a list of "rounds" of matches.
+
+Brackets are typically used to express the logical structure of the matches in
+terms of the knockout, but have no bearing on the scheduling of the matches.
+This for example enables having an "Upper" and "Lower" bracket when running a
+double-elimination knockout. Brackets have a ``name`` and a ``display_name``.
+The former can be used to cross reference the ``knockout_bracket`` value on a
+match.
+
+Rounds are groups of matches which are scheduled as a block. Matches from
+different brackets *may* appear within the same round. Each round is expressed
+as a list of matches which make up that round. Matches are expressed using the
+same format as the `/matches`_ endpoint.
 
 .. code-block:: json
 
     {
+        "structure": {
+            "brackets": [
+                {
+                    "name": "...",
+                    "display_name": "..."
+                }
+            ]
+        },
         "rounds": [
             [
                 "...",
@@ -402,6 +424,18 @@ the same format as the `/matches`_ endpoint.
         ]
     }
 
+
+/knockout/structure
+-------------------
+
+Get structural information about the knockouts. This is equivalent to the
+``structure`` key in the ``/knockout`` endpoint.
+
+.. code-block:: json
+
+    {
+        "brackets": "..."
+    }
 
 /tiebreaker
 -----------
