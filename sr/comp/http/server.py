@@ -418,10 +418,31 @@ def current_state() -> Response:
     )
 
 
+def _knockout_structure(comp: SRComp) -> dict[str, Any]:
+    return {
+        'brackets': [
+            {
+                'name': x.name,
+                'display_name': x.display_name,
+            }
+            for x in comp.schedule.knockout_brackets
+        ],
+    }
+
+
 @app.route('/knockout')
 def knockout() -> Response:
     comp: SRComp = g.comp_man.get_comp()
-    return jsonify(rounds=comp.schedule.knockout_rounds)
+    return jsonify(
+        rounds=comp.schedule.knockout_rounds,
+        structure=_knockout_structure(comp),
+    )
+
+
+@app.route('/knockout/structure')
+def knockout_structure() -> Response:
+    comp: SRComp = g.comp_man.get_comp()
+    return jsonify(_knockout_structure(comp))
 
 
 @app.route('/tiebreaker')

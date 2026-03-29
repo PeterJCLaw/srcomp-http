@@ -20,7 +20,8 @@ setup(
     author="Student Robotics Competition Software SIG",
     author_email="srobo-devel@googlegroups.com",
     install_requires=[
-        'sr.comp >=1.5, <2',
+        # 1.14 adds support for knockout structure info
+        'sr.comp >=1.14, <2',
         'Flask >=2.2',
         'Werkzeug >= 2, <4',
         'simplejson >=3.6, <4',
