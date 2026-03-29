@@ -4,6 +4,3 @@
 pip >= 20
 wheel >= 0.36
 setuptools >= 50
-
-# Temporarily include SRComp development branch
-git+https://github.com/PeterJCLaw/srcomp@knockout-brackets
